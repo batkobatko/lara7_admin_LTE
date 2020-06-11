@@ -4,16 +4,24 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-// use Hash;
-use Auth;
 use Session;
+use Auth;
+use App\Admin;
+use Hash;
 
 
-class AdminController extends Controller
+class AdminController extends  Controller
 {
+
     //
     public function dashboard(){
     	return view('admin.admin_dashboard');
+    }
+
+    public function settings(){
+     // echo "<pre>"; print_r(Auth::guard('admin')->user()); die;
+      $adminDetails = Admin::where('email', Auth::guard('admin')->user()->email)->first();
+      return view('admin.admin_settings')->with(compact('adminDetails'));
     }
 
     public function login(Request $request){
@@ -52,9 +60,20 @@ class AdminController extends Controller
     	Auth::guard('admin')->logout();
     	return redirect('/admin');
     }
+  
+
+  public function chkCurrentPassword(Request $request){
+    $data = $request->all();
+ //   echo "<pre>"; print_r($data);
+ //   echo "<pre>"; print_r(Auth::guard('admin')->user()->password); die;
+    if(Hash::check($data['current_pwd'],Auth::guard('admin')->user()->password)){
+        echo "true";
+    }else{
+        echo "false";
+    }
+
+   }
 }
-
-
 
 
 /*   		$validatedData = $request->validate([

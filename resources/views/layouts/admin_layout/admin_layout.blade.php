@@ -81,6 +81,8 @@
 <script src="{{ asset('/dashboard/dist/js/pages/dashboard.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('/dashboard/dist/js/demo.js') }}"></script>
+<!--Custom Admin JS-->
+<script src="{{ asset('/dashboard/dist/js/admin_script.js') }}"></script>
 </body>
 </html>
 
