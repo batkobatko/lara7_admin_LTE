@@ -61,7 +61,7 @@
                   </div>
               @endif
               <!-- form start -->
-              <form role="form" method="post" action="{{  url('/admin/update-admin-details') }}" name="updateAdminDetails" id="updateAdminDetails">@csrf
+              <form role="form" method="post" action="{{  url('/admin/update-admin-details') }}" name="updateAdminDetails" id="updateAdminDetails" enctype="multipart/form-data">@csrf
                 <div class="card-body">
                  
                   <div class="form-group">
@@ -82,11 +82,16 @@
                     <input type="text" class="form-control" name="admin_mobile" id="admin_mobile"  placeholder="Enter Admin Mobile" value="{{ Auth::guard('admin')->user()->mobile }}" required="">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputPassw ord1">Image</label>
-                    <input type="file" class="admin-control" name="admin_image" id="admin_image">
-                  </div>
+                    <label for="exampleInputPassword1">Image</label>
+                    <!-- uslov za importovanje slike -->
+                    <input type="file" class="form-control" name="admin_image" id="admin_image" accept="image/*">
+                    @if(!empty(Auth::guard('admin')->user()->image))
+                    <a target="_blank" href="{{ url('/dashboard/dist/img/admin_img/'.Auth::guard('admin')->user()->image) }}">View Image</a>
+                    <input type="hidden" name="current_admin_image" value="{{ Auth::guard('admin')->user()->image }}">
+                    @endif  
  
-                </div>
+                  </div>
+                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
