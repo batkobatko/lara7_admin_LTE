@@ -83,6 +83,7 @@
 
 <!-- JQVMap -->
 <script src="{{ asset('/dashboard/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
+<!--<script src="/dashboard/plugins/jqvmap/maps/jquery.vmap.usa.js"></script> -->
 
 <!-- jQuery Knob Chart -->
 <script src="{{ asset('/dashboard/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
