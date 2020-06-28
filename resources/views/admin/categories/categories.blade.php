@@ -28,6 +28,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Categories</h3>
+                <a href="{{ url('admin/add-edit-category') }}" style="max-width: 150px; float:right; display:inline-block;"  class="btn btn-block btn-success">Add Category</a>
               </div>
               <!-- /.card-header -->
             </div>

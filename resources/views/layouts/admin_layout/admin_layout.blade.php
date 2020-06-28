@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="{{ asset('/dashboard/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
   <!-- Tempusdominus Bbootstrap 4 -->
   <link rel="stylesheet" href="{{ asset('/dashboard/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+
+  <!-- Select2 - Koristi se za EDIT CATEGORY stranicu (advanced HTML)-->
+  <link rel="stylesheet" href="{{ asset('/dashboard/plugins/select2/css/select2.min.css')}}">
   <!-- iCheck -->
   <link rel="stylesheet" href="{{ asset('/dashboard/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
   <!-- JQVMap --> 
@@ -43,7 +46,6 @@
 
 @include('layouts.admin_layout.admin_footer')
 
-
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -62,7 +64,12 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('/dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
+ <!-- Select2 - Koristi se za EDIT CATEGORY stranicu (advanced HTML)-->
+ <script src="{{ asset('/dashboard/plugins/select2/js/select2.full.min.js') }}"></script>
+<!-- custom color variants-->
+ <script>
+   $('.select2').select2();
+ </script>
 <!-- DataTables -->
 <script src="{{ asset('/dashboard/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('/dashboard/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -71,6 +78,7 @@
 <script>
   $(function () {
     $("#sections").DataTable();
+    $("#categories").DataTable();
   });
 </script>
 
@@ -92,6 +100,7 @@
 <script src="{{ asset('/dashboard/plugins/daterangepicker/daterangepicker.js') }}"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ asset('/dashboard/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+
 <!-- Summernote -->
 <script src="{{ asset('/dashboard/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <!-- overlayScrollbars -->
