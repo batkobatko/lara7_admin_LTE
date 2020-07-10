@@ -99,6 +99,10 @@ class AdminController extends  Controller
     }
   }
   Public function updateAdminDetails(Request $request){
+
+//dd($request);
+
+
     session::put('page', 'update-admin-details');
     if($request->isMethod('post')){
       $data = $request->all();
