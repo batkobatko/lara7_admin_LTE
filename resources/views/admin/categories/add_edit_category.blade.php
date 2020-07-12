@@ -32,7 +32,7 @@
             </ul>
           </div>
         @endif
-      	<form name="categoryForm" id="categoryForm" action="{{ url('admin/add-edit-category') }}" method="post" enctype="=multipart/form-data">@csrf
+      	<form name="categoryForm" id="CategoryForm" action="{{ url('admin/add-edit-category') }}" method="post" enctype="multipart/form-data">@csrf
           <div class="card card-default">
           <div class="card-header">
             <h3 class="card-title">Add Category</h3>
@@ -48,27 +48,24 @@
                     <label for="category_name">Category Name</label>
                     <input type="text" class="form-control" name="category_name" id="category_name" placeholder="Enter Category Name">
                 </div>
-                <div class="form-group">
-                  <label>Select Category Level</label>
-                  <select name="parent_id" id="parent_id" class="form-control select2" style="width: 100%;"> 
-                    <option value="0">Main Category</option>
-                   </select>
+                <div id="appendCategoriesLevel">
+                  @include('admin.categories.append_categories_level')
                 </div>
               </div>  
               <div class="col-md-6">
-				<div class="form-group">
+				        <div class="form-group">
                   <label>Select Section</label>
                   <select name="section_id" id="section_id" class="form-control select2" style="width: 100%;">
                     <option value="">Select</option>
                     @foreach($getSections as $section) 
-                    <option value="{{ $section->id }}">{{ $section->name }}</option>
+                        <option value="{{ $section->id }}">{{ $section->name }}</option>
                     @endforeach
                   </select> 
                 </div>                
-               <div class="form-group">
-                  <label for="exampleInputFile">Category Image</label>
-                    <div class="input-group">
-                      <div class="custom-file">
+              <div class="form-group">
+                <label for="exampleInputFile">Category Image</label>
+                  <div class="input-group">
+                    <div class="custom-file">
                         <input type="file" class="custom-file-input" id="category_image" name="category_image" accept="image/*">
                         <label class="custom-file-label" for="category_image">Choose file</label>
                       </div>
@@ -81,7 +78,7 @@
             </div>
             <div class="row">
               <div class="col-12 col-sm-6">
-				<div class="form-group">
+				       <div class="form-group">
                     <label for="category_name">Category Dicount</label>
                     <input type="text" class="form-control" id="category_discount" name="category_discount" placeholder="Enter Category Name">
                 </div>
@@ -119,7 +116,7 @@
           </div>
           </div>
         </form>
- 
+
       </div>        
       <!-- /.container-fluid -->
     </section>
