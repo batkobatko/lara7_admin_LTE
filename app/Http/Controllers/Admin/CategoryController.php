@@ -15,36 +15,45 @@ use Image;
 class CategoryController extends Controller
 {
     public function categories(){
-    	Session::put('page','categories');
-    	$categories = Category::get();
-    //	$categories = json_decode(json_encode($categories));
-    //	echo "<pre>"; print_r($categories); die;
-    	return view('admin.categories.categories')->with(compact('categories'));
-    }
-    public function updateCategoryStatus(Request $request){
-    	if ($request->ajax()){
-    		$data = $request->all();
-    	//	echo "<pre>"; print_r($data); die;
-    		if($data['status']=="Active"){
-    			$status = 0; 
-    		}else{
-    			$status = 1;
-       		}
-       		Category::where('id',$data['category_id'])->update(['status'=>$status]);
-       		return response()->json(['status'=>$status,'category_id'=>$data['category_id']]); 
-    	}
+        Session::put('page','categories');
+        $categories = Category::with(['section', 'parentcategory'])->get();
+       // $categories = json_decode(json_encode($categories));
+       // echo "<pre>"; print_r($categories); die;
+        return view('admin.categories.categories')->with(compact('categories'));
     }
 
-    public function addEditCategory(Request $request, $id=null){
+    public function updateCategoryStatus(Request $request){
+        if ($request->ajax()){
+            $data = $request->all();
+        //  echo "<pre>"; print_r($data); die;
+            if($data['status']=="Active"){
+                $status = 0; 
+            }else{
+                $status = 1;
+            }
+            Category::where('id',$data['category_id'])->update(['status'=>$status]);
+            return response()->json(['status'=>$status,'category_id'=>$data['category_id']]); 
+        }
+    }
+
+    public function addEditCategory(Request $request, $id=null){ 
     //    echo "test"; die;
         if($id==""){ 
-            $title = "Add Category";
             //Add Category Funcionlaity
+            $title = "Add Category";
             $category = new Category;
+            $categorydata = array();
+            $getCategories = array();
         }else{
-            $title = "Edit Category";
             //Edit Category Functionality
+            $title = "Edit Category";
+            $categorydata = Category::where('id',$id)->first();
+            $categorydata = json_decode(json_encode($categorydata),true);
+            $getCategories = Category::with('subcategories')->where(['parent_id'=>0, 'section_id'=>$categorydata['section_id']])->get();
+            $getCategories = json_decode(json_encode($getCategories),true);
+          // echo "<pre>"; print_r($getCategories); die;
         }
+
         if($request->isMethod('post')){
             $data = $request->all();
         //  echo "<pre>"; print_r($data); die;
@@ -67,7 +76,7 @@ class CategoryController extends Controller
       $this->validate($request, $rules, $customMessages);
 
             // (Upload image - script:)
-           // Upload Category Image
+            // Upload Category Image
             if($request->hasFile('category_image')){
                 $image_tmp = $request->file('category_image');
                 if($image_tmp->isValid()){
@@ -83,9 +92,6 @@ class CategoryController extends Controller
                 }
             }
         
-        // if(empty($data['category_image'])){
-        // $data['category_image']="";
-        // }
             if(empty($data['category_discount'])){
             $data['category_discount']="";
             }
@@ -125,7 +131,7 @@ class CategoryController extends Controller
             //Get All Sections
         $getSections = Section::get();
       
-        return view('admin.categories.add_edit_category')->with(compact('title','getSections'));
+        return view('admin.categories.add_edit_category')->with(compact('title','getSections','categorydata', 'getCategories'));
     }
     public function appendCategoryLevel(Request $request){
         if($request->ajax()){

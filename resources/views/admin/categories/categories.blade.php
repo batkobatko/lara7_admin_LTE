@@ -55,23 +55,36 @@
                   <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Parent Category</th>
+                    <th>Section</th>
                     <th>URL</th>
                     <th>Status</th>
+                    <th>Actions</th>
                    </tr>
                    </thead>
                    <tbody>
-                   @foreach($categories as $category)
+                    @foreach($categories as $category)
+                    @if(!isset($category->parentcategory->category_name))
+                      <?php $parent_category = "Root"; ?>
+                    @else
+                      <?php $parent_category = $category->parentcategory->category_name; ?>
+                    @endif
                   <tr>
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->category_name }}</td>
+                    <td>{{ $parent_category }}</td>
+                    <td>{{ $category->section->name }}</td>
                     <td>{{ $category->url }}</td>
-                    <td>@if($category->status==1)
+
+                    <td>
+                      @if($category->status==1)
                    <a class="updateCategoryStatus" id="category-{{  $category->id }}" category_id="{{  $category->id }}" href="javascript:void(0)">Active</a>
                     @else
                     <a class="updateCategoryStatus" id="category-{{  $category->id }}" category_id="{{  $category->id }}" href="javascript:void(0)">
                      Inactive </a>
                     @endif</td>
+                    <td><a href="{{ url('admin/add-edit-category/'.$category->id) }}">Edit </a></td>
                   </tr>
                   @endforeach
 
