@@ -58,7 +58,7 @@
                   <select name="section_id" id="section_id" class="form-control select2" style="width: 100%;">
                     <option value="">Select</option>
                     @foreach($getSections as $section) 
-                        <option value="{{ $section->id }}" @if(!empty($categorydata['section_id'])&& ['section_id']==$section->id) selected @endif>{{ $section->name }}</option>
+                        <option value="{{ $section->id }}" @if(!empty($categorydata['section_id']) && $categorydata ['section_id']==$section->id) selected @endif>{{ $section->name }}</option>
                     @endforeach
                   </select> 
                 </div>                
@@ -94,19 +94,19 @@
                 </div>
                 <div class="form-group">
                     <label for="meta_title">Meta Title</label>
-                      <textarea id="meta_title" name="meta_title" class="form-control" rows="3" placeholder="Enter ..." @if(!empty($categorydata['meta_title'])) value="{{ $categorydata['meta_title'] }}" @else value="{{ old('meta_title') }}" @endif></textarea>
+                      <textarea id="meta_title" name="meta_title" class="form-control" rows="3" placeholder="Enter ...">@if(!empty($categorydata['meta_title'])) {{ $categorydata['meta_title'] }} @else {{ old('meta_title') }} @endif</textarea>
                 </div>
               </div>
               <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label for="meta_description">Meta Description</label>
-                    <textarea id="meta_description" name="meta_description" class="form-control" rows="3" placeholder="Enter ..." @if(!empty($categorydata['meta_description'])) value="{{ $categorydata['meta_description'] }}" @else value="{{ old('meta_description') }}" @endif></textarea>
+                    <textarea id="meta_description" name="meta_description" class="form-control" rows="3" placeholder="Enter ...">@if(!empty($categorydata['meta_description'])) {{ $categorydata['meta_description'] }} @else {{ old('meta_description') }} @endif</textarea>
                 </div>
               </div>
               <div class="col-12 col-sm-6">
                 <div class="form-group">
                     <label for="meta_keywords">Meta Keywords</label>
-                      <textarea id="meta_keywords" name="meta_keywords" class="form-control" rows="3" placeholder="Enter ..." @if(!empty($categorydata['meta_keywords'])) value="{{ $categorydata['meta_keywords'] }}" @else value="{{ old('meta_keywords') }}" @endif></textarea>
+                      <textarea id="meta_keywords" name="meta_keywords" class="form-control" rows="3" placeholder="Enter ..."> @if(!empty($categorydata['meta_keywords'])) {{ $categorydata['meta_keywords'] }} @else {{ old('meta_keywords') }} @endif</textarea>
                 </div>
               </div>
             </div>

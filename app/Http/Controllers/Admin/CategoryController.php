@@ -44,6 +44,7 @@ class CategoryController extends Controller
             $category = new Category;
             $categorydata = array();
             $getCategories = array();
+            $message = "Category added successfully!";
         }else{
             //Edit Category Functionality
             $title = "Edit Category";
@@ -52,6 +53,8 @@ class CategoryController extends Controller
             $getCategories = Category::with('subcategories')->where(['parent_id'=>0, 'section_id'=>$categorydata['section_id']])->get();
             $getCategories = json_decode(json_encode($getCategories),true);
           // echo "<pre>"; print_r($getCategories); die;
+            $category = Category::find($id);
+            $message = "Category updated successfully!";
         }
 
         if($request->isMethod('post')){
@@ -125,7 +128,7 @@ class CategoryController extends Controller
             $category->status = 1;
             $category->save();
         
-            session::flash('success_message', 'Category added successufully!');
+            session::flash('success_message',$message);
             return redirect('admin/categories');
   }
             //Get All Sections
