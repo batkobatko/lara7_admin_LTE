@@ -25,7 +25,6 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-
             @if(Session::has('success_message'))
              <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px">
                {{ Session::get("success_message") }}
@@ -34,8 +33,6 @@
                  </button>
               </div>
             @endif
-
-
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Categories</h3>
@@ -84,7 +81,10 @@
                     <a class="updateCategoryStatus" id="category-{{  $category->id }}" category_id="{{  $category->id }}" href="javascript:void(0)">
                      Inactive </a>
                     @endif</td>
-                    <td><a href="{{ url('admin/add-edit-category/'.$category->id) }}">Edit </a></td>
+                    <td>
+                      <a href="{{ url('admin/add-edit-category/'.$category->id) }}">Edit </a> &nbsp;&nbsp;
+                      <a href="{{ url('admin/delete-category/'.$category->id) }}">Delete </a>
+                    </td>
                   </tr>
                   @endforeach
 
