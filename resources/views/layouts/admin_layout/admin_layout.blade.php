@@ -113,6 +113,8 @@
 <script src="{{ asset('/dashboard/dist/js/demo.js') }}"></script>
 <!--Custom Admin JS-->
 <script src="{{ asset('/dashboard/dist/js/admin_script.js') }}"></script>
+<!--Sweet Alert script-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>
 </html>
 
