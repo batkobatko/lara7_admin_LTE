@@ -115,7 +115,18 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Categories</p>  
                 </a>
-            </li>   
+            </li>
+            @if(Session::get('page')=="products") 
+                <?php $active = "active"; ?>
+              @else 
+                <?php $active = ""; ?>
+              @endif
+            <li class="nav-item">
+                <a href="{{ asset('admin/products') }}" class="nav-link  {{ $active }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Products</p>  
+                </a>
+            </li>      
          </ul>
        </li>
       </ul>

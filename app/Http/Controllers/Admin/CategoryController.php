@@ -118,7 +118,7 @@ class CategoryController extends Controller
             $category->parent_id = $data['parent_id'];
             $category->section_id = $data['section_id'];
             $category->category_name = $data['category_name'];
-          //  $category->category_image = $data['category_image'];
+          //$category->category_image = $data['category_image'];
             $category->category_discount = $data['category_discount'];
             $category->description = $data['description'];
             $category->url = $data['url'];
@@ -166,6 +166,7 @@ class CategoryController extends Controller
         session::flash('success_message',$message);
         return redirect()->back();
     }
+    
     public function deleteCategory($id){
         //Delete Category
         Category::where('id', $id)->delete();
