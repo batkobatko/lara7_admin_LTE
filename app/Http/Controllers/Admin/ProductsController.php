@@ -36,10 +36,25 @@ class ProductsController extends Controller
     }
     public function deleteProduct($id){
         //Delete Product
-        Product::where('id', $id)->delete();
+        Product::where('id',$id)->delete();
 
         $message = 'Product has been deleted successfully';
         session::flash('success_message',$message);
         return redirect()->back();
+    }
+
+    public function addEditProduct(Request $request,$id=null){
+    	if($id==""){
+    		$title = "Add Product";
+    	}else{
+    		$title = "Eddit Product";
+    	}
+    	//filter Arrays (slicno kao na Amazonu)
+    	$fabricArray = array('Cotton','Poliester','wool');
+    	$sleeveArray = array('Full Sleeve','Half Sleeve','Short Sleeve','Sleeveless');
+    	$paternArray = array('Checked','Plain','Printed','Self','Solid');
+    	$fitArray = array('Regular','Slim');
+    	$occassionArray = array('Casual','Formal');
+    	return view('admin.products.add_edit_product')->with(compact('title','fabricArray','sleeveArray','paternArray','fitArray','occassionArray'));
     }
 }
