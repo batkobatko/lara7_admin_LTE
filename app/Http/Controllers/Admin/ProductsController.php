@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Section;
 use App\Product;
 use Session;
 
@@ -54,7 +55,14 @@ class ProductsController extends Controller
     	$sleeveArray = array('Full Sleeve','Half Sleeve','Short Sleeve','Sleeveless');
     	$paternArray = array('Checked','Plain','Printed','Self','Solid');
     	$fitArray = array('Regular','Slim');
-    	$occassionArray = array('Casual','Formal');
-    	return view('admin.products.add_edit_product')->with(compact('title','fabricArray','sleeveArray','paternArray','fitArray','occassionArray'));
+    	$occasionArray = array('Casual','Formal');
+
+    	//Kreiranje relacija (Section with Categories and Subcategories)
+    	$categories = Section::with('categories')->get();
+    	$categories = json_decode(json_encode($categories), true);
+    	//echo "<pre>"; print_r($categories); die;
+
+
+    	return view('admin.products.add_edit_product')->with(compact('title','fabricArray','sleeveArray','paternArray','fitArray','occasionArray','categories'));
     }
 }

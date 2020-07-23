@@ -56,6 +56,15 @@
                   <label>Select Category</label>
                   <select name="category_id" id="category_id" class="form-control select2" style="width: 100%;">
                     <option value="">Select</option>
+                    @foreach($categories as $section)
+                      <optgroup label="{{ $section['name'] }}"></optgroup>
+                      @foreach($section['categories'] as $category)
+                      <option value="{{ $category['id'] }}">&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;{{ $category['category_name'] }}</option>
+                        @foreach($category['subcategories'] as $subcategory)
+                        <option value="{{ $subcategory['id'] }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;{{ $subcategory['category_name'] }}</option> 
+                        @endforeach 
+                      @endforeach
+                    @endforeach
                   </select> 
                 </div> 
                 <div class="form-group">
@@ -125,20 +134,75 @@
                       <textarea name="wash_care" id="wash_care" class="form-control" rows="3" placeholder="Enter ...">@if(!empty($productdata['wash_care'])) {{ $productdata['wash_care'] }} @else {{ old('wash_care') }} @endif</textarea>
                 </div>
                 <div class="form-group">
+                  <label>Select Fabric</label>
+                  <select name="fabric" id="fabric" class="form-control select2" style="width: 100%;">
+                    <option value="">Select</option>
+                    @foreach($fabricArray as $fabric)
+                    <option value="{{ $fabric }}">{{ $fabric }}</option>
+                    @endforeach
+                  </select> 
+                </div> 
+              </div>
+              <div class="col-12 col-sm-6">
+                <div class="form-group">
+                  <label>Select Sleeve</label>
+                  <select name="sleeve" id="sleeve" class="form-control select2" style="width: 100%;">
+                    <option value="">Select</option>
+                    @foreach($sleeveArray as $sleeve)
+                    <option value="{{ $sleeve }}">{{ $sleeve }}</option>
+                    @endforeach
+                  </select> 
+              </div>
+                <div class="form-group">
+                  <label>Select Patern</label>
+                  <select name="patern" id="patern" class="form-control select2" style="width: 100%;">
+                    <option value="">Select</option>
+                    @foreach($paternArray as $patern)
+                    <option value="{{ $patern }}">{{ $patern }}</option>
+                    @endforeach
+                  </select> 
+                </div>
+              </div>
+              <div class="col-12 col-sm-6">
+                <div class="form-group">
+                  <label>Select Fit</label>
+                  <select name="fit" id="fit" class="form-control select2" style="width: 100%;">
+                    <option value="">Select</option>
+                    @foreach($fitArray as $fit)
+                    <option value="{{ $fit }}">{{ $fit }}</option>
+                    @endforeach
+                  </select>
+              </div>
+                 <div class="form-group">
+                  <label>Select Occasion</label>
+                  <select name="occasion" id="occasion" class="form-control select2" style="width: 100%;">
+                    <option value="">Select</option>
+                    @foreach($occasionArray as $occasion)
+                    <option value="{{ $occasion }}">{{ $occasion }}</option>
+                    @endforeach
+                  </select> 
+                </div>
+               </div>
+              <div class="col-12 col-sm-6">                              
+                <div class="form-group">
                     <label for="meta_title">Meta Title</label>
                       <textarea id="meta_title" name="meta_title" class="form-control" rows="3" placeholder="Enter ...">@if(!empty($productdata['meta_title'])) {{ $productdata['meta_title'] }} @else {{ old('meta_title') }} @endif</textarea>
                 </div>
               </div>
-              <div class="col-12 col-sm-6">
+              <div class="col-12 col-sm-6"> 
                 <div class="form-group">
                     <label for="meta_description">Meta Description</label>
                     <textarea id="meta_description" name="meta_description" class="form-control" rows="3" placeholder="Enter ...">@if(!empty($productdata['meta_description'])) {{ $productdata['meta_description'] }} @else {{ old('meta_description') }} @endif</textarea>
                 </div>
               </div>
               <div class="col-12 col-sm-6">
-                <div class="form-group">
+                 <div class="form-group">
                     <label for="meta_keywords">Meta Keywords</label>
                       <textarea id="meta_keywords" name="meta_keywords" class="form-control" rows="3" placeholder="Enter ..."> @if(!empty($productdata['meta_keywords'])) {{ $productdata['meta_keywords'] }} @else {{ old('meta_keywords') }} @endif</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="meta_keywords">Futured Items</label>
+                      <input type="checkbox" name="is_futured" id="is_futured" value="1">
                 </div>
               </div>
             </div>
