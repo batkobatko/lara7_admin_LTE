@@ -59,9 +59,9 @@
                     @foreach($categories as $section)
                       <optgroup label="{{ $section['name'] }}"></optgroup>
                       @foreach($section['categories'] as $category)
-                      <option value="{{ $category['id'] }}">&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;{{ $category['category_name'] }}</option>
+                      <option value="{{ $category['id']}}" @if(!empty(@old('category_id'))&& $category['id']==@old('category_id')) selected="" @endif>&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;{{ $category['category_name'] }}</option>
                         @foreach($category['subcategories'] as $subcategory)
-                        <option value="{{ $subcategory['id'] }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;{{ $subcategory['category_name'] }}</option> 
+                        <option value="{{ $subcategory['id'] }}" @if(!empty(@old('category_id'))&& $subcategory['id']==@old('category_id')) selected="" @endif>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;{{ $subcategory['category_name'] }}</option> 
                         @endforeach 
                       @endforeach
                     @endforeach
@@ -75,7 +75,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                     <label for="product_code">Product Code</label>
-                    <input type="text" class="form-control" code="product_code" id="product_code" placeholder="Enter product Code" @if(!empty($productdata['product_code'])) value="{{ $productdata['product_code'] }}" @else value="{{ old('product_code') }}" @endif>
+                    <input type="text" class="form-control" name="product_code" id="product_code" placeholder="Enter Product Code" @if(!empty($productdata['product_code'])) value="{{ $productdata['product_code'] }}" @else value="{{ old('product_code') }}" @endif>
                 </div>
                 <div class="form-group">
                     <label for="product_color">Product Color</label>
@@ -85,7 +85,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                     <label for="product_price">Product Price</label>
-                    <input type="text" class="form-control" price="product_price" id="product_price" placeholder="Enter product Price" @if(!empty($productdata['product_price'])) value="{{ $productdata['product_price'] }}" @else value="{{ old('product_price') }}" @endif>
+                    <input type="text" class="form-control" name="product_price" id="product_price" placeholder="Enter product Price" @if(!empty($productdata['product_price'])) value="{{ $productdata['product_price'] }}" @else value="{{ old('product_price') }}" @endif>
                 </div>
                 <div class="form-group">
                     <label for="product_discount">Product Discount (%)</label>
@@ -202,7 +202,7 @@
                 </div>
                 <div class="form-group">
                     <label for="meta_keywords">Futured Items</label>
-                      <input type="checkbox" name="is_futured" id="is_futured" value="1">
+                      <input type="checkbox" name="is_featured" id="is_featured" value="yes">
                 </div>
               </div>
             </div>
