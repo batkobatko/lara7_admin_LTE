@@ -112,11 +112,11 @@
               </div>
               <div class="col-12 col-sm-6">
                 <div class="form-group">
-                <label for="main_video">Product Video</label>
+                <label for="product_video">Product Video</label>
                   <div class="input-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="main_video" name="main_video" accept="video/*">
-                        <label class="custom-file-label" for="main_video">Choose file</label>
+                        <input type="file" class="custom-file-input" id="product_video" name="product_video" accept="video/*">
+                        <label class="custom-file-label" for="product_video">Choose file</label>
                       </div>
                       <div class="input-group-append">
                         <span class="input-group-text" id="">Upload</span>

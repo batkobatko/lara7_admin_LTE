@@ -8,6 +8,7 @@ use App\Section;
 use App\Product;
 use App\Category;
 use Session;
+use Image;
 
 class ProductsController extends Controller
 {
@@ -129,7 +130,44 @@ class ProductsController extends Controller
             $data['meta_keywords'] = "";
         }
  
-
+        //Upload product Image
+        if($request->hasFile('main_image')){
+            $image_tmp = $request->file('main_image'); 
+            if($image_tmp->isValid()){
+               //Get Image Extension (Upload images after Resize)
+                $image_name = $image_tmp->getClientOriginalName();
+                //Get Original Image Name
+                $extension = $image_tmp->getClientOriginalExtension();
+                // Generate New Image Name
+                $imageName = $image_name.'_'.rand(111,9999).'.'.$extension;
+                // Set Path for small, medium and large iamges 
+                $large_image_path = 'dashboard/dist/img/product_img/large/'.$imageName;
+                $medium_image_path = 'dashboard/dist/img/product_img/medium/'.$imageName;
+                $small_image_path = 'dashboard/dist/img/product_img/small/'.$imageName;
+                // Upload Large Image
+                Image::make($image_tmp)->save($large_image_path); //W:1040 H:1200
+                // Upload Medium and Small Images after Resize
+                Image::make($image_tmp)->resize(520,600)->save($medium_image_path);
+                Image::make($image_tmp)->resize(260,300)->save($small_image_path);
+                //Save Product Main Image in product table
+                $product->main_image = $imageName;
+            }
+        }
+                
+                //Upload product Video
+                if($request->hasFile('product_video')){
+                    $video_tmp = $request->file('product_video'); 
+                    if($video_tmp->isValid()){
+                    // Upload video 
+                    $video_name = $video_tmp->getClientOriginalName();
+                    $extension = $video_tmp->getClientOriginalExtension();
+                    $videoName = $video_name.'_'.rand().'.'.$extension;
+                    $video_path = 'dashboard/dist/vid/product_videos/';
+                    $video_tmp->move($video_path,$videoName);
+                    //Save Video in product table
+                    $product->product_video = $videoName;
+            }
+        }
 
       // Save product details in table
       $categoryDetails = Category::find($data['category_id']);
