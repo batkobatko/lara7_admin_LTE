@@ -54,6 +54,7 @@
                     <th>Product Name</th>
                     <th>Product Code</th>
                     <th>Product Color</th>
+                    <th>Product image</th>
                     <th>Category</th>
                     <th>Section</th>
                     <th>Status</th>
@@ -65,8 +66,16 @@
                    <tr>
                      <td>{{ $product->id }}</td>
                      <td>{{ $product->product_name }}</td>
-                     <td>{{ $product->product_code }}</td>
-                     <td>{{ $product->product_color }}</td>
+                     <td>{{ $product->product_code }}</td>                     <td>{{ $product->product_color }}</td>                   
+                     <td>
+                      <?php $product_image_path = "dashboard/dist/img/product_img/small/".$product->main_image; ?>
+                      @if(!empty($product->main_image) && file_exists($product_image_path))
+                        <img style="width: 100px;" src="{{ asset('dashboard/dist/img/product_img/small/'.$product->main_image) }}">
+                        @else
+                        <img style="width: 100px;" src="{{ asset('dashboard/dist/img/product_img/small/no-image.png') }}">
+
+                      @endif
+                    </td>
                      <td>{{ $product->category->category_name }}</td>
                      <td>{{ $product->section->name }}</td>
                      <td>
