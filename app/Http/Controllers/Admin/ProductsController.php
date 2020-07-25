@@ -50,10 +50,17 @@ class ProductsController extends Controller
     	if($id==""){
     		$title = "Add Product";
             $product = new Product;
+            $productdata = array();
+            $message = "Product added successfully";
             }else{
-    		$title = "Eddit Product";
+    		$title = "Edit Product";
+            $productdata = Product::find($id);
+            $productdata = json_decode(json_encode($productdata),true);
+        //    echo"<pre>"; print_r($productdata); die;
+            $product = Product::find($id);
+            $message = "Product updated successfully";
     	}
-
+ 
         if($request->isMethod('post')){
             $data = $request->all();
          // echo "<pre>"; print_r($data); die;
@@ -188,22 +195,19 @@ class ProductsController extends Controller
       $product->occasion = $data['occasion'];
       $product->meta_title = $data['meta_title'];
       $product->meta_keywords = $data['meta_keywords'];
+      $product->meta_description = $data['meta_description'];
       $product->is_featured = $is_fetured;
-      $product->status = 1; //omogucava da sstatus prilikom unosa bude odmah aktivan
+      $product->status = 1; //omogucava da status prilikom unosa bude odmah aktivan
       $product->save();
-      session::flash('success_message','Product added successfully');
+      session::flash('success_message',$message);
       return redirect('admin/products');
-     
+    
     }
-
-
-     // echo "<pre>"; print_r($categoruDetails); die;
-
- 
-    	// filter Arrays (slicno kao na Amazonu)
+        // echo "<pre>"; print_r($categoruDetails); die;
+     	// filter Arrays (slicno kao na Amazonu)
     	$fabricArray = array('Cotton','Poliester','wool');
     	$sleeveArray = array('Full Sleeve','Half Sleeve','Short Sleeve','Sleeveless');
-    	$paternArray = array('Checked','Plain','Printed','Self','Solid');
+    	$patternArray = array('Checked','Plain','Printed','Self','Solid');
     	$fitArray = array('Regular','Slim');
     	$occasionArray = array('Casual','Formal');
 
@@ -213,6 +217,6 @@ class ProductsController extends Controller
     	// echo "<pre>"; print_r($categories); die;
 
 
-    	return view('admin.products.add_edit_product')->with(compact('title','fabricArray','sleeveArray','paternArray','fitArray','occasionArray','categories'));
+    	return view('admin.products.add_edit_product')->with(compact('title','fabricArray','sleeveArray','patternArray','fitArray','occasionArray','categories', 'productdata'));
     }
 }

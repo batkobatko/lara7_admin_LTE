@@ -59,9 +59,9 @@
                     @foreach($categories as $section)
                       <optgroup label="{{ $section['name'] }}"></optgroup>
                       @foreach($section['categories'] as $category)
-                      <option value="{{ $category['id']}}" @if(!empty(@old('category_id'))&& $category['id']==@old('category_id')) selected="" @endif>&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;{{ $category['category_name'] }}</option>
+                      <option value="{{ $category['id']}}" @if(!empty(@old('category_id'))&& $category['id']==@old('category_id')) selected="" @elseif(!empty($productdata['category_id']) && $productdata['category_id']== $category['id']) selected="" @endif>&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;{{ $category['category_name'] }}</option>
                         @foreach($category['subcategories'] as $subcategory)
-                        <option value="{{ $subcategory['id'] }}" @if(!empty(@old('category_id'))&& $subcategory['id']==@old('category_id')) selected="" @endif>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;{{ $subcategory['category_name'] }}</option> 
+                        <option value="{{ $subcategory['id'] }}" @if(!empty(@old('category_id'))&& $subcategory['id']==@old('category_id')) selected="" @elseif(!empty($productdata['category_id']) && $productdata['category_id']== $subcategory['id']) selected="" @endif>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;{{ $subcategory['category_name'] }}</option> 
                         @endforeach 
                       @endforeach
                     @endforeach
@@ -108,6 +108,7 @@
                         <span class="input-group-text" id="">Upload</span>
                       </div>
                     </div>
+                    <div> Recomended Image Size: width:1040px, Height:1200px</div>
                   </div>
               </div>
               <div class="col-12 col-sm-6">
@@ -138,7 +139,7 @@
                   <select name="fabric" id="fabric" class="form-control select2" style="width: 100%;">
                     <option value="">Select</option>
                     @foreach($fabricArray as $fabric)
-                    <option value="{{ $fabric }}">{{ $fabric }}</option>
+                    <option value="{{ $fabric }}" @if(!empty($productdata['fabric']) && $productdata['fabric']==$fabric) selected="" @endif >{{ $fabric }}</option>
                     @endforeach
                   </select> 
                 </div> 
@@ -149,16 +150,16 @@
                   <select name="sleeve" id="sleeve" class="form-control select2" style="width: 100%;">
                     <option value="">Select</option>
                     @foreach($sleeveArray as $sleeve)
-                    <option value="{{ $sleeve }}">{{ $sleeve }}</option>
+                    <option value="{{ $sleeve }}" @if(!empty($productdata['sleeve']) && $productdata['sleeve']==$sleeve) selected="" @endif >{{ $sleeve }}</option>
                     @endforeach
                   </select> 
               </div>
                 <div class="form-group">
-                  <label>Select Patern</label>
-                  <select name="patern" id="patern" class="form-control select2" style="width: 100%;">
+                  <label>Select Pattern</label>
+                  <select name="pattern" id="pattern" class="form-control select2" style="width: 100%;">
                     <option value="">Select</option>
-                    @foreach($paternArray as $patern)
-                    <option value="{{ $patern }}">{{ $patern }}</option>
+                    @foreach($patternArray as $pattern)
+                    <option value="{{ $pattern }}"  @if(!empty($productdata['pattern']) && $productdata['pattern']==$pattern) selected="" @endif >{{ $pattern }}</option>
                     @endforeach
                   </select> 
                 </div>
@@ -169,7 +170,7 @@
                   <select name="fit" id="fit" class="form-control select2" style="width: 100%;">
                     <option value="">Select</option>
                     @foreach($fitArray as $fit)
-                    <option value="{{ $fit }}">{{ $fit }}</option>
+                    <option value="{{ $fit }}"  @if(!empty($productdata['fit']) && $productdata['fit']==$fit) selected="" @endif >{{ $fit }}</option>
                     @endforeach
                   </select>
               </div>
@@ -178,7 +179,7 @@
                   <select name="occasion" id="occasion" class="form-control select2" style="width: 100%;">
                     <option value="">Select</option>
                     @foreach($occasionArray as $occasion)
-                    <option value="{{ $occasion }}">{{ $occasion }}</option>
+                    <option value="{{ $occasion }}" @if(!empty($productdata['occasion']) && $productdata['occasion']==$occasion) selected="" @endif>{{ $occasion }}</option>
                     @endforeach
                   </select> 
                 </div>
@@ -202,7 +203,7 @@
                 </div>
                 <div class="form-group">
                     <label for="meta_keywords">Futured Items</label>
-                      <input type="checkbox" name="is_featured" id="is_featured" value="yes">
+                      <input type="checkbox" name="is_featured" id="is_featured" value="yes" @if(!empty($productdata['is_featured']) && $productdata['is_featured']=="Yes") checked="" @endif>
                 </div>
               </div>
             </div>
