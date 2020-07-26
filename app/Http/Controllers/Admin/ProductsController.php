@@ -219,4 +219,68 @@ class ProductsController extends Controller
 
     	return view('admin.products.add_edit_product')->with(compact('title','fabricArray','sleeveArray','patternArray','fitArray','occasionArray','categories', 'productdata'));
     }
+
+    public function deleteProductImage($id){
+        // Get Product Image
+        $productImage = Product::select('main_image')->where('id',$id)->first();
+
+        // Get product Image Path
+        $small_image_path = 'dashboard/dist/img/product_img/small/';
+        $medium_image_path = 'dashboard/dist/img/product_img/medium/';
+        $large_image_path = 'dashboard/dist/img/product_img/large/';
+
+        // Delete product small image if exist in small Folder
+        if(file_exists($small_image_path.$productImage->main_image)){
+            unlink($small_image_path.$productImage->main_image);
+        }
+
+        // Delete product medium image if exist in medium Folder
+        if(file_exists($medium_image_path.$productImage->main_image)){
+            unlink($medium_image_path.$productImage->main_image);
+        }
+
+        // Delete product large image if exist in large Folder
+        if(file_exists($large_image_path.$productImage->main_image)){
+            unlink($large_image_path.$productImage->main_image);
+        }
+         //delete Product Image from products tabler
+        Product::where('id', $id)->update(['main_image'=>'']);
+
+        $message = 'Product image has been deleted successfully';
+        session::flash('success_message',$message);
+        return redirect()->back();
+    }
+
+     public function deleteProductVideo($id){
+        // Get Product Video
+        $productVideo = Product::select('product_video')->where('id',$id)->first();
+
+        // Get Product Video Path
+        $product_video_path = 'dashboard/dist/vid/product_videos/';
+
+        // Delete Product Video from vategory_iamges folder if exist
+        if(file_exists($product_video_path.$productVideo->product_video)){
+            unlink($product_video_path.$productVideo->product_video);
+        }
+ 
+        //delete Product Video from categories folder
+        Product::where('id', $id)->update(['product_video'=>'']);
+
+        $message = 'Product video has been deleted successfully';
+        session::flash('success_message',$message);
+        return redirect()->back();
+    }
 }
+
+
+
+/*
+--Product
+    -Size: small    Medium     Large
+    - Price: 1200    1300       1400
+    -  Stock: 20     10         20
+    - SKU:BFT01-S   BFT01-M     BFT01-L 
+
+    SKU(Stock Keeping Unit)
+
+*/
