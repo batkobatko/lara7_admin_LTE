@@ -66,7 +66,8 @@
                    <tr>
                      <td>{{ $product->id }}</td>
                      <td>{{ $product->product_name }}</td>
-                     <td>{{ $product->product_code }}</td>                     <td>{{ $product->product_color }}</td>                   
+                     <td>{{ $product->product_code }}</td>                     
+                     <td>{{ $product->product_color }}</td>                   
                      <td>
                       <?php $product_image_path = "dashboard/dist/img/product_img/small/".$product->main_image; ?>
                       @if(!empty($product->main_image) && file_exists($product_image_path))
@@ -86,8 +87,9 @@
                      Inactive </a>
                     @endif</td>
                     <td>
-                      <a href="{{ url('admin/add-edit-product/'.$product->id) }}">Edit </a> &nbsp;&nbsp;
-                      <a href="javascript:void(0)" class="confirmDelete" record="product" recordid="{{  $product->id }}" <?php /* href="{{ url('admin/delete-product/'.$product->id) }}" */ ?> >Delete</a>
+                      <a title="Add/Edit Attributes" href="{{ url('admin/add-attributes/'.$product->id) }}"><i class="fas fa-plus"></i></a> &nbsp;&nbsp;
+                      <a title="Edit Product" href="{{ url('admin/add-edit-product/'.$product->id) }}"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;
+                      <a title="Delete Product" href="javascript:void(0)" class="confirmDelete" record="product" recordid="{{  $product->id }}" <?php /* href="{{ url('admin/delete-product/'.$product->id) }}" */ ?>> <i class="fas fa-trash"></i></a>
                     </td>
                   </tr>
                   @endforeach
