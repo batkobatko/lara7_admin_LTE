@@ -40,8 +40,16 @@
                  </button>
               </div>
             @endif
+            @if(Session::has('error_message'))
+             <div class="alert alert-danger alert-warning fade show" role="alert" style="margin-top: 10px">
+               {{ Session::get("error_message") }}
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                 </button>
+              </div>
+            @endif
         <form name="attributeForm" id="attributeForm" method="post" action="{{ 'url'('admin/add-attributes/'.$productdata['id']) }}">@csrf
-          <div class="card card-default">
+        <div class="card card-default">
           <div class="card-header">
             <h3 class="card-title">{{ $title }}</h3>
             <div class="card-tools">
@@ -73,10 +81,10 @@
               <div class="form-group">
                   <div class="field_wrapper">
                     <div>
-                      <input id="size" name="size[]" type="text" name="size[]" value="" placeholder="Size" style="width: 120px;" />
-                      <input id="sku" name="sku[]" type="text" name="sku[]" value="" placeholder="SKU" style="width: 120px;"/>
-                      <input id="price" name="price[]" type="text" name="price[]" value="" placeholder="Price" style="width: 120px;"/>
-                      <input id="stock" name="stock[]" type="text" name="stock[]" value="" placeholder="Stock" style="width: 120px;"/>
+                      <input id="size" name="size[]" type="text" name="size[]" value="" placeholder="Size" style="width: 120px;" required=""/>
+                      <input id="sku" name="sku[]" type="text" name="sku[]" value="" placeholder="SKU" style="width: 120px;" required=""/>
+                      <input id="price" name="price[]" type="number" name="price[]" value="" placeholder="Price" style="width: 120px;" required=""/>
+                      <input id="stock" name="stock[]" type="number" name="stock[]" value="" placeholder="Stock" style="width: 120px;"required=""/>
                       <a href="javascript:void(0);" class="add_button" title="Add field">Add</a>
                     </div>
                   </div>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Section;
 use App\Product;
 use App\Category;
+use App\ProductsAttribute;
 use Session;
 use Image;
 
@@ -274,8 +275,44 @@ class ProductsController extends Controller
     public function addAttributes(Request $request,$id){
       if($request->isMethod('post')){
           $data = $request->all();
-          echo "<pre>"; print_r($data); die;
+          //echo "<pre>"; print_r($data); die;
+          foreach ($data['sku'] as $key => $value){
+              if(!empty($value)){
+
+                //SKU alredy exist check
+                $attrCountSKU = ProductsAttribute::where('sku',$value)->count();
+                if($attrCountSKU>0){
+                  $message = 'SKU alredy exist. Please add another SKU';
+                  session::flash('error_message',$message);
+                  return redirect()->back();
+                }
+
+                //Size alredy exist check
+                $attrCountSize = ProductsAttribute::where(['product_id'=>$id,'size'=>$data['size'][$key]])->count();
+                if($attrCountSize>0){
+                  
+                  $message = 'Size  alredy exist. Please add another Size';
+                  session::flash('error_message',$message);
+                  return redirect()->back();
+                }
+
+                $attribute = new ProductsAttribute;
+                $attribute->product_id = $id;
+                $attribute->sku = $value;
+                $attribute->size = $data['size'][$key];
+                $attribute->price = $data['price'][$key];
+                $attribute->stock = $data['stock'][$key];
+                $attribute->save();
+              }
+          }
+
+      $success_message = 'Product Attributes has been added successfully!';
+      session::flash('success_message',$success_message);
+      return redirect()->back();
+
       }
+
+
 
       $productdata = Product::find($id);
       $productdata = json_decode(json_encode($productdata),true);
