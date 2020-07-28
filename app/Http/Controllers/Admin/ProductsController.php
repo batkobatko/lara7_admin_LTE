@@ -270,7 +270,7 @@ class ProductsController extends Controller
         $message = 'Product video has been deleted successfully';
         session::flash('success_message',$message);
         return redirect()->back();
-    }
+    } 
 
     public function addAttributes(Request $request,$id){
       if($request->isMethod('post')){
@@ -290,7 +290,7 @@ class ProductsController extends Controller
                 //Size alredy exist check
                 $attrCountSize = ProductsAttribute::where(['product_id'=>$id,'size'=>$data['size'][$key]])->count();
                 if($attrCountSize>0){
-                  
+
                   $message = 'Size  alredy exist. Please add another Size';
                   session::flash('error_message',$message);
                   return redirect()->back();
@@ -313,10 +313,9 @@ class ProductsController extends Controller
       }
 
 
-
-      $productdata = Product::find($id);
+      $productdata = Product::select('id','product_name','product_code', 'product_color','main_image')->with('attributes')->find($id);
       $productdata = json_decode(json_encode($productdata),true);
-      // echo "<pre>"; print_r($productdata); die;
+    //   echo "<pre>"; print_r($productdata); die;
       $title = "Product Attributes";
       return view('admin.products.add_attributes')->with(compact('productdata','title'));
 
@@ -327,11 +326,15 @@ class ProductsController extends Controller
 
 /*
 --Product
+  --blue Formal T-Shirt - BFT01
     -Size: small    Medium     Large
     - Price: 1200    1300       1400
     -  Stock: 20     10         20
     - SKU:BFT01-S   BFT01-M     BFT01-L 
 
     SKU(Stock Keeping Unit)
+  --Red Formal T-Shirt
+--Casual T-Shirts
+
 
 */
