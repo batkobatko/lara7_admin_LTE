@@ -318,8 +318,23 @@ class ProductsController extends Controller
     //   echo "<pre>"; print_r($productdata); die;
       $title = "Product Attributes";
       return view('admin.products.add_attributes')->with(compact('productdata','title'));
-
     }
+
+    public function editAttributes(Request $request,$id){
+        if($request->isMethod('post')){
+          $data = $request->all();
+       // echo "<pre>"; print_r($data); die;
+          foreach ($data['attrId'] as $key => $attr){
+              if(!empty($attr)){
+                ProductsAttribute::where(['id'=>$data['attrId'][$key]])->update(['price'=>$data['price'][$key],'stock'=>$data['stock'][$key]]);
+              } 
+            $message = 'Product attributes has been updated successfully';
+            session::flash('success_message',$message);
+            return redirect()->back();
+
+          }
+    }
+  }
 }
 
 
