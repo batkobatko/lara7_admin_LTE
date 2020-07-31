@@ -88,56 +88,6 @@ class ProductsController extends Controller
       ];
       $this->validate($request, $rules, $customMessages);
 
-        if(empty($data['is_featured'])){
-            $is_fetured = "No";
-        }else{
-            $is_fetured = "Yes";
-        }
-
-        if(empty($data['product_discount'])){
-            $data['product_discount'] = "";
-        }
-
-        if(empty($data['product_weight'])){
-            $data['product_weight'] = "";
-        }
-
-        if(empty($data['description'])){
-            $data['description'] = "";
-        }
-
-        if(empty($data['wash_care'])){
-            $data['wash_care'] = "";
-        }
-
-         if(empty($data['fabric'])){
-            $data['fabric'] = "";
-        }
-
-         if(empty($data['pattern'])){
-            $data['pattern'] = "";
-        }
-
-         if(empty($data['sleeve'])){
-            $data['sleeve'] = "";
-        }
-
-         if(empty($data['fit'])){
-            $data['fit'] = "";
-        }
-
-         if(empty($data['occasion'])){
-            $data['occasion'] = "";
-        }
-
-         if(empty($data['meta_title'])){
-            $data['meta_title'] = "";
-        }
-
-         if(empty($data['meta_keywords'])){
-            $data['meta_keywords'] = "";
-        }
- 
         //Upload product Image
         if($request->hasFile('main_image')){
             $image_tmp = $request->file('main_image'); 
@@ -197,7 +147,9 @@ class ProductsController extends Controller
       $product->meta_title = $data['meta_title'];
       $product->meta_keywords = $data['meta_keywords'];
       $product->meta_description = $data['meta_description'];
-      $product->is_featured = $is_fetured;
+      if(!empty($data['is_featured'])){
+        $product->is_featured = $data['is_featured']; //video 46
+      }
       $product->status = 1; //omogucava da status prilikom unosa bude odmah aktivan
       $product->save();
       session::flash('success_message',$message);
@@ -349,6 +301,7 @@ class ProductsController extends Controller
             return response()->json(['status'=>$status,'attribute_id'=>$data['attribute_id']]); 
         }
     }
+
      public function deleteAttribute($id){
         //Delete Attribute
         ProductsAttribute::where('id',$id)->delete();
@@ -356,6 +309,16 @@ class ProductsController extends Controller
         $message = 'Attribute has been deleted successfully';
         session::flash('success_message',$message);
         return redirect()->back();
+    }
+
+    public function addImages($id){
+        $productdata = Product::with('images')->select('id','product_name','product_code', 'product_color','main_image')->find($id);
+                     //->where('id',$id)->first();
+        $productdata = json_decode(json_encode($productdata),true);
+        // echo"<pre>"; print_r($productdata); die;
+        $title = "Product Images";
+         return view('admin.products.add_images')->with(compact('title','productdata'));
+         //ovdje cemo sacuvati podatke  
     }
 }
 

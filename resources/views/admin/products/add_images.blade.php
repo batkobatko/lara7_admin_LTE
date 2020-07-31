@@ -13,7 +13,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Products Attributes</li>
+              <li class="breadcrumb-item active">Products Images</li>
             </ol>
           </div>
         </div>
@@ -49,7 +49,7 @@
               </div>
             @endif
 
-        <form name="addAttributeForm" id="addAttributeForm" method="post" action="{{ 'url'('admin/add-attributes/'.$productdata['id']) }}">@csrf
+        <form name="addImagesForm" id="addImagesForm" method="post" action="{{ 'url'('admin/add-images/'.$productdata['id']) }}" enctype="multipart/form-data">@csrf
         <div class="card card-default">
           <div class="card-header">
             <h3 class="card-title">{{ $title }}</h3>
@@ -82,61 +82,46 @@
               <div class="form-group">
                   <div class="field_wrapper">
                     <div>
-                      <input id="size" name="size[]" type="text" name="size[]" value="" placeholder="Size" style="width: 120px;" required=""/>
-                      <input id="sku" name="sku[]" type="text" name="sku[]" value="" placeholder="SKU" style="width: 120px;" required=""/>
-                      <input id="price" name="price[]" type="number" name="price[]" value="" placeholder="Price" style="width: 120px;" required=""/>
-                      <input id="stock" name="stock[]" type="number" name="stock[]" value="" placeholder="Stock" style="width: 120px;"required=""/>
-                      <a href="javascript:void(0);" class="add_button" title="Add field">Add</a>
-                    </div>
+                      <input multiple="" id="image" name="image[]" type="file" name="image[]" value=""/>
+                      </div>
                   </div>
                 </div>
               </div>
              </div>
             </div>        
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Add Attributes</button>
+                <button type="submit" class="btn btn-primary">Add Images</button>
             </div>
           </div>
         </form>
 
-        <form name="editAttributesForm" id="editAttributeForm" method="post" action="{{ url('admin/edit-attributes/'.$productdata['id']) }}">@csrf 
+        <form name="editImageForm" id="editImageForm" method="post" action="{{ url('admin/edit-images/'.$productdata['id']) }}">@csrf 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Added Product Attributes</h3>
+                <h3 class="card-title">Added Product Images</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="products" class="table table-bordered table-striped">
+                <table id="products" class="table table-bordered table-striped"><thead>
                     <th>ID</th>
-                    <th>Size</th>
-                    <th>SKU</th>`
-                    <th>Price</th> 
-                    <th>Stock</th>
+                    <th>Image</th>
                     <th>Actions</th>
                    </tr>
                    </thead>
                    <tbody>
-                   @foreach($productdata['attributes'] as $attribute)
-                   <input style="display: none" type="text" name="attrId[]" value="{{ $attribute['id'] }}">
+                   @foreach($productdata['images'] as $image)
+                   <input style="display: none" type="text" name="attrId[]" value="{{ $image['id'] }}">
                    <tr>
-                     <td>{{ $attribute['id'] }}</td>
-                     <td>{{ $attribute['size'] }}</td>
-                     <td>{{ $attribute['sku'] }}</td>                     
+                     <td>{{ $image['id'] }}</td>
+                     <td><img style="width: 120px;" src="{{ asset('dashboard/dist/img/product_img/small/'.$image['image']) }}"></td>
                      <td>
-                      <input type="number" name="price[]" value="{{ $attribute['price'] }}" required="">
-                    </td> 
-                     <td>
-                      <input type="number" name="stock[]" value="{{ $attribute['stock'] }}" required="">
-                   </td>
-                     <td>
-
-                       @if($attribute['status']==1)
-                    <a class="updateAttributeStatus" id="attribute-{{ $attribute['id'] }}" attribute_id="{{ $attribute['id'] }}" href="javascript:void(0)">Active</a>
+                    @if($image['status']==1)
+                    <a class="updateImagestatus" id="image-{{ $image['id'] }}" image_id="{{ $image['id'] }}" href="javascript:void(0)">Active</a>
                     @else
-                      <a class="updateAttributeStatus" id="attribute-{{ $attribute['id'] }}" attribute_id="{{ $attribute['id'] }}" href="javascript:void(0)">Inactive </a>
+                      <a class="updateImagestatus" id="image-{{ $image['id'] }}" image_id="{{ $image['id'] }}" href="javascript:void(0)">Inactive </a>
                     @endif
                     &nbsp;&nbsp;
-                      <a title="Delete Attribute" href="javascript:void(0)" class="confirmDelete" record="attribute" recordid="{{  $attribute['id'] }}"><i class="fas fa-trash"></i></a>
+                      <a title="Delete Images" href="javascript:void(0)" class="confirmDelete" record="image" recordid="{{  $image['id'] }}"><i class="fas fa-trash"></i></a>
                   </td> 
                 </tr>
                   @endforeach
@@ -146,7 +131,7 @@
               </div>
 
                <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Update Attributes</button>
+                <button type="submit" class="btn btn-primary">Update Images</button>
             </div>
               <!-- /.card-body -->
             </div>

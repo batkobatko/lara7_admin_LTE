@@ -216,7 +216,7 @@
                 </div>
                 <div class="form-group">
                     <label for="meta_keywords">Futured Items</label>
-                      <input type="checkbox" name="is_featured" id="is_featured" value="yes" @if(!empty($productdata['is_featured']) && $productdata['is_featured']=="Yes") checked="" @endif>
+                      <input type="checkbox" name="is_featured" id="is_featured" value="Yes" @if(!empty($productdata['is_featured']) && $productdata['is_featured']=="Yes") checked="" @endif>
                 </div>
               </div>
             </div>
