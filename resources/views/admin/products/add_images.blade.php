@@ -82,7 +82,7 @@
               <div class="form-group">
                   <div class="field_wrapper">
                     <div>
-                      <input multiple="" id="image" name="image[]" type="file" name="image[]" value=""/>
+                      <input multiple="" id="images" name="images[]" type="file" name="images[]" value=""/>
                       </div>
                   </div>
                 </div>
@@ -116,9 +116,9 @@
                      <td><img style="width: 120px;" src="{{ asset('dashboard/dist/img/product_img/small/'.$image['image']) }}"></td>
                      <td>
                     @if($image['status']==1)
-                    <a class="updateImagestatus" id="image-{{ $image['id'] }}" image_id="{{ $image['id'] }}" href="javascript:void(0)">Active</a>
+                    <a class="updateImageStatus" id="image-{{ $image['id'] }}" image_id="{{ $image['id'] }}" href="javascript:void(0)">Active</a>
                     @else
-                      <a class="updateImagestatus" id="image-{{ $image['id'] }}" image_id="{{ $image['id'] }}" href="javascript:void(0)">Inactive </a>
+                      <a class="updateImageStatus" id="image-{{ $image['id'] }}" image_id="{{ $image['id'] }}" href="javascript:void(0)">Inactive </a>
                     @endif
                     &nbsp;&nbsp;
                       <a title="Delete Images" href="javascript:void(0)" class="confirmDelete" record="image" recordid="{{  $image['id'] }}"><i class="fas fa-trash"></i></a>
