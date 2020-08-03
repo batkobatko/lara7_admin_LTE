@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Section;
+use App\Brand;
 use App\Product;
 use App\Category;
 use App\ProductsAttribute;
@@ -70,6 +71,7 @@ class ProductsController extends Controller
     // Product Validations
       $rules = [
         'category_id' => 'required',
+      //  'brand_id' => 'required',
         'product_name' => 'required|regex:/^[\pL\s\-]+$/u',
         'product_code' => 'required|regex:/^[\w-]*$/',
         'product_price' => 'required|numeric',
@@ -112,7 +114,7 @@ class ProductsController extends Controller
                 $product->main_image = $imageName;
             }
         }
-              
+
                 //Upload product Video
                 if($request->hasFile('product_video')){
                     $video_tmp = $request->file('product_video'); 
@@ -131,6 +133,7 @@ class ProductsController extends Controller
       // Save product details in table
       $categoryDetails = Category::find($data['category_id']);
       $product->section_id = $categoryDetails['section_id'];
+      $product->brand_id = $data['brand_id'];
       $product->category_id = $data['category_id'];
       $product->product_name = $data['product_name'];
       $product->product_code = $data['product_code'];
@@ -155,8 +158,8 @@ class ProductsController extends Controller
       $product->save();
       session::flash('success_message',$message);
       return redirect('admin/products');
-    
     }
+
         // echo "<pre>"; print_r($categoruDetails); die;
      	// filter Arrays (slicno kao na Amazonu)
     	$fabricArray = array('Cotton','Poliester','wool');
@@ -170,8 +173,11 @@ class ProductsController extends Controller
     	$categories = json_decode(json_encode($categories), true);
     	// echo "<pre>"; print_r($categories); die;
 
+      //Get All Brands
+      $brands = Brand::where('status',1)->get(); //samo aktivni brendovi
+      $brands = json_decode(json_encode($brands),true);
 
-    	return view('admin.products.add_edit_product')->with(compact('title','fabricArray','sleeveArray','patternArray','fitArray','occasionArray','categories', 'productdata'));
+    	return view('admin.products.add_edit_product')->with(compact('title','fabricArray','sleeveArray','patternArray','fitArray','occasionArray','categories', 'productdata','brands'));
     }
 
     public function deleteProductImage($id){

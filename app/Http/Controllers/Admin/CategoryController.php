@@ -61,22 +61,22 @@ class CategoryController extends Controller
             $data = $request->all();
         //  echo "<pre>"; print_r($data); die;
 
-        // Category Validations
-      $rules = [
-        'category_name' => 'required|regex:/^[\pL\s\-]+$/u',
-        'section_id' => 'required',
-        'url' => 'required',
-        'category_image' => 'image',
-      ];
+            // Category Validations
+        $rules = [
+            'category_name' => 'required|regex:/^[\pL\s\-]+$/u',
+            'section_id' => 'required',
+            'url' => 'required',
+            'category_image' => 'image',
+        ];
 
-      $customMessages = [
-        'category_name.required' => 'Category Name is required', 
-        'category_name.regex' => 'Valid Category Name is reuqired',
-        'section_id.required' => 'Section is required',
-        'url.required' => 'Category URL is required',
-        'category_image.image' => 'Valid Category Image is required',
-      ];
-      $this->validate($request, $rules, $customMessages);
+         $customMessages = [
+            'category_name.required' => 'Category Name is required', 
+            'category_name.regex' => 'Valid Category Name is reuqired',
+            'section_id.required' => 'Section is required',
+            'url.required' => 'Category URL is required',
+            'category_image.image' => 'Valid Category Image is required',
+        ];
+        $this->validate($request, $rules, $customMessages);
 
             // (Upload image - script:)
             // Upload Category Image
