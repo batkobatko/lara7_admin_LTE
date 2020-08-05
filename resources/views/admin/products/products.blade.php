@@ -19,7 +19,6 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
- 
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -75,7 +74,6 @@
                         @else
                         <img style="width: 100px;" src="{{ asset('dashboard/dist/img/product_img/small/no-image.png') }}">
                       @endif
-                      
                     </td>
                      <td>{{ $product->category->category_name }}</td> 
                      <td>{{ $product->section->name }}</td>
@@ -93,7 +91,6 @@
                       </td>
                     </tr>
                   @endforeach
-
                   </tbody>
                 </table>
               </div>

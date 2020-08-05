@@ -211,7 +211,7 @@ class ProductsController extends Controller
         return redirect()->back();
     }
 
-     public function deleteProductVideo($id){
+    public function deleteProductVideo($id){
         // Get Product Video
         $productVideo = Product::select('product_video')->where('id',$id)->first();
 
@@ -272,7 +272,6 @@ class ProductsController extends Controller
 
       }
 
-
       $productdata = Product::select('id','product_name','product_code', 'product_color','main_image')->with('attributes')->find($id);
       $productdata = json_decode(json_encode($productdata),true);
     //   echo "<pre>"; print_r($productdata); die;
@@ -295,6 +294,7 @@ class ProductsController extends Controller
               return redirect()->back();
       }
     }
+
     public function updateAttributeStatus(Request $request){
         if ($request->ajax()){
             $data = $request->all();
@@ -309,7 +309,7 @@ class ProductsController extends Controller
         }
     }
 
-      public function updateImageStatus(Request $request){
+    public function updateImageStatus(Request $request){
         if ($request->ajax()){
             $data = $request->all();
         //  echo "<pre>"; print_r($data); die;
@@ -323,14 +323,14 @@ class ProductsController extends Controller
         }
     }
 
-     public function deleteAttribute($id){
-        //Delete Attribute
-        ProductsAttribute::where('id',$id)->delete();
+    public function deleteAttribute($id){
+        // Delete Attribute
+           ProductsAttribute::where('id',$id)->delete();
 
-        $message = 'Attribute has been deleted successfully';
-        session::flash('success_message',$message);
-        return redirect()->back();
-    }
+            $message = 'Attribute has been deleted successfully';
+            session::flash('success_message',$message);
+            return redirect()->back();
+        }
 
     public function addImages(Request $request,$id){
         if($request->isMethod('post')){

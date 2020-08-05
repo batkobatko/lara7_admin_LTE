@@ -19,7 +19,6 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -41,7 +40,6 @@
               <!-- /.card-header -->
             </div>
             <!-- /.card -->
-
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Sections</h3>
@@ -72,7 +70,6 @@
                     @endif</td>
                   </tr>
                   @endforeach
-
                   </tbody>
                 </table>
               </div>

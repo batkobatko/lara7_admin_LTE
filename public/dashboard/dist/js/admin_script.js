@@ -72,8 +72,8 @@ $(document).ready(function() {
 		});
 	});
 
-		//Update Categories Status
-		$(".updateCategoryStatus").click(function(){
+	//Update Categories Status
+	$(".updateCategoryStatus").click(function(){
 		//var status = $(this).text();
 		var status = $(this).children("i").attr("status");
 		var category_id = $(this).attr("category_id");
@@ -124,8 +124,8 @@ $(document).ready(function() {
 		return false;
 	});*/
 
-		//Update Product Status
-		$(".updateProductStatus").click(function(){
+	//Update Product Status
+	$(".updateProductStatus").click(function(){
 		// var status = $(this).text();
 		var status = $(this).children("i").attr("status");
 		var product_id = $(this).attr("product_id");
@@ -149,8 +149,8 @@ $(document).ready(function() {
 		});
 	});
 
-		//Update Attribute Status
-		$(".updateAttributeStatus").click(function(){
+	//Update Attribute Status
+	$(".updateAttributeStatus").click(function(){
 		var status = $(this).text();
 		var attribute_id = $(this).attr("attribute_id");
 		//	alert(status);
@@ -173,8 +173,8 @@ $(document).ready(function() {
 		});
 	});
 
-		//Update Image Status
-		$(".updateImageStatus").click(function(){
+	//Update Image Status
+	$(".updateImageStatus").click(function(){
 		var status = $(this).text();
 		var image_id = $(this).attr("image_id");
 		//	alert(status);
@@ -233,8 +233,8 @@ $(document).ready(function() {
     var fieldHTML = '<div><div style"height:10px;"></div><input type="text" name="size[]" style="width:120px" placeholder="Size" />&nbsp;<input type="text" name="sku[]" style="width:120px" placeholder="SKU" />&nbsp;<input type="text" name="price[]" style="width:120px" placeholder="Price" />&nbsp;<input type="text" name="stock[]" style="width:120px" placeholder="Stock"/>&nbsp;<a href="javascript:void(0);" class="remove_button">Delete</a></div>'; //New input field html 
     var x = 1; //Initial field counter is 1
     
-    //Once add button is clicked 
-    $(addButton).click(function(){
+	//Once add button is clicked 
+	$(addButton).click(function(){
         //Check maximum number of input fields
         if(x < maxField){ 
             x++; //Increment field counter
