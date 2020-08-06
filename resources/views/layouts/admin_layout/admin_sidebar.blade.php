@@ -76,11 +76,8 @@
                 </a>
             </li>
 
-      
-
-
-            <!--catalogues-->
-            @if(Session::get('page')=="sections" || Session::get('page')=="brands") || Session::get('page')=="categories" || Session::get('page')=="products")
+                  <!--catalogues-->
+            @if(Session::get('page')=="sections" || Session::get('page')=="brands" || Session::get('page')=="categories" || Session::get('page')=="products")
               <?php $active = "active"; ?>
            @else
               <?php $active = ""; ?>
