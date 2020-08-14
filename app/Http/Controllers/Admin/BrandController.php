@@ -14,17 +14,17 @@ class BrandController extends Controller
     	$brands = Brand::get();
     	return view('admin.brands.brands')->with(compact('brands'));
     }
-        public function updateBrandStatus(Request $request ){
-    	if ($request->ajax()){
-    		$data = $request->all();
-    	//	echo "<pre>"; print_r($data); die;
-    		if($data['status']=="Active"){
-    			$status = 0; 
-    		}else{
-    			$status = 1;
-       		}
-       		Brand::where('id',$data['brand_id'])->update(['status'=>$status]);
-       		return response()->json(['status'=>$status, 'brand_id'=>$data['brand_id']]); 
+    public function updateBrandStatus(Request $request ){
+	if ($request->ajax()){
+		$data = $request->all();
+	//	echo "<pre>"; print_r($data); die;
+		if($data['status']=="Active"){
+			$status = 0; 
+		}else{
+			$status = 1;
+   		}
+   		Brand::where('id',$data['brand_id'])->update(['status'=>$status]);
+   		return response()->json(['status'=>$status, 'brand_id'=>$data['brand_id']]); 
     	}
     }
 

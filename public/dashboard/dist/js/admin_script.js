@@ -24,7 +24,8 @@ $(document).ready(function() {
 	});
 	
 	//Update Section Status
-	$(".updateSectionStatus").click(function(){
+	//$(".updateSectionStatus").click(function(){
+	$(document).on("click",".updateSectionStatus",function(){
 		var status = $(this).children("i").attr("status");
 		var section_id = $(this).attr("section_id");
 		//	alert(status);
@@ -39,7 +40,7 @@ $(document).ready(function() {
 				if(resp['status']==0){
 					$("#section-"+section_id).html("<i class='fas fa-toggle-off' aria-hidden='true' status='Inactive'></i>");
 				}else if(resp['status']==1){ 
-					$("#section-"+section_id).html(" <i class='fas fa-toggle-on' aria-hidden='true' status='Active'> </i>");
+					$("#section-"+section_id).html("<i class='fas fa-toggle-on' aria-hidden='true' status='Active'></i>");
 				}
 			},error:function(){
 				alert("Error");
@@ -48,7 +49,8 @@ $(document).ready(function() {
 	});
 
 	//Update Brand Status
-	$(".updateBrandStatus").click(function(){
+	//$(".updateBrandStatus").click(function(){
+	$(document).on("click",".updateBrandStatus",function(){ 
 		var status = $(this).children("i").attr("status");
 		//alert(status); return false;
 		var brand_id = $(this).attr("brand_id");
@@ -72,8 +74,10 @@ $(document).ready(function() {
 		});
 	});
 
-	//Update Categories Status
-	$(".updateCategoryStatus").click(function(){
+		//Update Categories Status
+		
+		//$(".updateCategoryStatus").click(function(){
+		$(document).on("click",".updateCategoryStatus",function(){ 
 		//var status = $(this).text();
 		var status = $(this).children("i").attr("status");
 		var category_id = $(this).attr("category_id");
@@ -125,7 +129,8 @@ $(document).ready(function() {
 	});*/
 
 	//Update Product Status
-	$(".updateProductStatus").click(function(){
+	//$(".updateProductStatus").click(function(){
+	$(document).on("click",".updateProductStatus",function(){ 
 		// var status = $(this).text();
 		var status = $(this).children("i").attr("status");
 		var product_id = $(this).attr("product_id");
@@ -150,7 +155,8 @@ $(document).ready(function() {
 	});
 
 	//Update Attribute Status
-	$(".updateAttributeStatus").click(function(){
+	//$(".updateAttributeStatus").click(function(){
+	$(document).on("click",".updateAttributeStatus",function(){ 
 		var status = $(this).text();
 		var attribute_id = $(this).attr("attribute_id");
 		//	alert(status);
@@ -174,7 +180,8 @@ $(document).ready(function() {
 	});
 
 	//Update Image Status
-	$(".updateImageStatus").click(function(){
+//	$(".updateImageStatus").click(function(){
+	$(document).on("click",".updateImageStatus",function(){ 
 		var status = $(this).text();
 		var image_id = $(this).attr("image_id");
 		//	alert(status);
@@ -198,7 +205,8 @@ $(document).ready(function() {
 	});
 
 	//Confirm Deletion with SweetAllert
-	$(".confirmDelete").click(function(){
+	//$(".confirmDelete").click(function(){
+	$(document).on("click",".confirmDelete",function(){ 
 		var record =$(this).attr("record");
 		var recordid =$(this).attr("recordid");
 		Swal.fire({
@@ -227,7 +235,7 @@ $(document).ready(function() {
 	});
 
 	// Product Attributes Add/Remove Script
-    var maxField = 10; //Input fields increment limitation
+    var maxField = 50; //Input fields increment limitation
     var addButton = $('.add_button'); //Add button selector
     var wrapper = $('.field_wrapper'); //Input field wrapper
     var fieldHTML = '<div><div style"height:10px;"></div><input type="text" name="size[]" style="width:120px" placeholder="Size" />&nbsp;<input type="text" name="sku[]" style="width:120px" placeholder="SKU" />&nbsp;<input type="text" name="price[]" style="width:120px" placeholder="Price" />&nbsp;<input type="text" name="stock[]" style="width:120px" placeholder="Stock"/>&nbsp;<a href="javascript:void(0);" class="remove_button">Delete</a></div>'; //New input field html 

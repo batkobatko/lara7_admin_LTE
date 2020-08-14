@@ -76,7 +76,7 @@
 <script src="{{ asset('/dashboard/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('/dashboard/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
 <script>
-  $(function () {
+  $(function() { 
     $("#sections").DataTable();
     $("#categories").DataTable();
     $("#products").DataTable();

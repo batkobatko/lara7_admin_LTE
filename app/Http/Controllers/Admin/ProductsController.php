@@ -153,6 +153,8 @@ class ProductsController extends Controller
       $product->meta_description = $data['meta_description'];
       if(!empty($data['is_featured'])){
         $product->is_featured = $data['is_featured']; //video 46
+      }else{
+        $product->is_featured = "No"; 
       }
       $product->status = 1; //omogucava da status prilikom unosa bude odmah aktivan
       $product->save();

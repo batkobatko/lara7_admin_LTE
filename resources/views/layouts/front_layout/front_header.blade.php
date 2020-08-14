@@ -23,11 +23,11 @@ $sections =Section::sections();
 		          <span class="icon-bar"></span>
 		          <span class="icon-bar"></span>
 		        </a>
-		        <a class="brand" href="#">Stack Developers</a>
+		        <a class="brand" href="#">VUNENAR</a>
 		        <div class="nav-collapse">
 		          <ul class="nav">
 		            <li class="active"><a href="#">Home</a></li>
-		            <@foreach($sections as $section)
+		            @foreach($sections as $section)
 			            @if(count($section['categories'])>0)
 			            <li class="dropdown">
 			              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $section['name'] }} <b class="caret"></b></a>
@@ -35,16 +35,15 @@ $sections =Section::sections();
 			              	@foreach($section['categories'] as $category)
 				              	<li class="divider"></li>
 				                <li class="nav-header"><a href="#">{{ $category['category_name'] }}</a></li>
-				                <li>
+				                
 				                @foreach($category['subcategories'] as $subcategory)
-				                	<a href="#">{{ $category['category_name'] }}</a></li>
+				                	<li><a href="#">&nbsp;&nbsp;{{ $subcategory['category_name'] }}</a></li>
 				                @endforeach
 			                @endforeach
 			              </ul>
 			            </li>
 			            @endif
 		            @endforeach
-
 		            <li><a href="#">About</a></li>
 		          </ul>
 		          <form class="navbar-search pull-left" action="#">
@@ -53,7 +52,7 @@ $sections =Section::sections();
 		          <ul class="nav pull-right">
 		            <li><a href="#">Contact</a></li>
 		            <li class="divider-vertical"></li>
-		            <li><a href="#">Login</a></li>
+		            <li><a href="{{  url('/admin') }}">Login</a></li>
 		          </ul>
 		        </div><!-- /.nav-collapse -->
 		      </div>
