@@ -103,6 +103,32 @@ $(document).ready(function() {
 		});
 	});
 
+	//Update Banners Status
+	//$(".updateBrandStatus").click(function(){
+	$(document).on("click",".updateBannerStatus",function(){ 
+		var status = $(this).children("i").attr("status");
+		//alert(status); return false;
+		var banner_id = $(this).attr("banner_id");
+		//	alert(status);
+		//	alert(banner_id);
+		$.ajax({
+			type:'post', 
+			url:'/admin/update-banner-status',
+			data:{status:status,banner_id:banner_id},
+			success:function(resp){
+		//		alert(resp['status']);
+		//		alert(resp['banner_id']);
+				if(resp['status']==0){
+					$("#banner-"+banner_id).html("<i class='fas fa-toggle-off' aria-hidden='true' status='Inactive'></i>");
+				}else if(resp['status']==1){ 
+					$("#banner-"+banner_id).html("<i class='fas fa-toggle-on' aria-hidden='true' status='Active'></i>");
+				}
+			},error:function(){
+				alert("Error");
+			}
+		});
+	});
+
 	//Append Category Level
 	$("#section_id").change(function(){
 		var section_id = $(this).val();
