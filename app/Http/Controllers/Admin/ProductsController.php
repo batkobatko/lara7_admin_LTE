@@ -361,6 +361,7 @@ class ProductsController extends Controller
                 //Save Product Main Image in products table
                 $productImage->image = $imageName;
                 $productImage->product_id = $id;
+                //$productImage->status = 1;
                 $productImage->save();
               }
               // return redirect('admin/dd-images/'.$id);

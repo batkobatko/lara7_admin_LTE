@@ -74,7 +74,14 @@
               </div>
               <div class="col-md-6">
               <div class="form-group">
-                  <img style="width: 120px;" src="{{ asset('dashboard/dist/img/product_img/small/'.$productdata['main_image']) }}">
+                  
+                <?php $product_image_path = "dashboard/dist/img/product_img/small/".$productdata['main_image'] ?>
+                @if(!empty($productdata['main_image']) && file_exists($product_image_path))
+                <img style="width: 120px;" src="{{ asset('dashboard/dist/img/product_img/small/'.$productdata['main_image']) }}">
+                @else
+                <img style="width: 120px;" src="{{ asset('dashboard/dist/img/product_img/small/no-image.png') }}">
+                @endif
+
                     </div>
                   </div>
                 </div>
@@ -113,7 +120,8 @@
                    <input style="display: none" type="text" name="attrId[]" value="{{ $image['id'] }}">
                    <tr>
                      <td>{{ $image['id'] }}</td>
-                     <td><img style="width: 120px;" src="{{ asset('dashboard/dist/img/product_img/small/'.$image['image']) }}"></td>
+                     <td><img style="width: 120px;" src="{{ asset('dashboard/dist/img/product_img/small/'.$image['image']) }}">
+                     </td>
                      <td>
                     @if($image['status']==1)
                     <a class="updateImageStatus" id="image-{{ $image['id'] }}" image_id="{{ $image['id'] }}" href="javascript:void(0)">Active</a>
