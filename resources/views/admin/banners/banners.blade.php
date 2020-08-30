@@ -63,11 +63,16 @@
                   <tr>
                     <td>{{ $banner['id'] }}</td>
                     <td>
-                    	<img style="width: 200px;" src="{{ asset('dashboard/dist/img/banners_img/'.$banner['image']) }}">
+                       <?php $product_image_path = "dashboard/dist/img/banners_img/".$banner['image'] ?>
+                      @if(!empty($banner['image']) && file_exists($product_image_path))
+                      <img style="width: 90px;" src="{{ asset('dashboard/dist/img/banners_img/'.$banner['image']) }}">
+                      @else
+                      <img style="width: 90px;" src="{{ asset('dashboard/dist/img/product_img/small/no-image.png') }}">
+                      @endif
                     </td>
                     <td>{{ $banner['link'] }}</td>
                     <td>{{ $banner['title'] }}</td>  
-                    <td>{{ $banner['alt'] }}</td>
+                    <td>{{ $banner['alt'] }}</td> 
                     <td>
                         <a title="Edit Banner" href="{{ url('admin/add-edit-banner/'.$banner['id']) }}"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;
                         <a title="Delete Banner" href="javascript:void(0)" class="confirmDelete" record="banner" recordid="{{  $banner['id'] }}"><i class="fas fa-trash"></i></a>&nbsp;&nbsp;

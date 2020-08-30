@@ -26,7 +26,7 @@
 <body>
 @include('layouts.front_layout.front_header')
 <!-- Header End====================================================================== -->
-@include('front.home_page_banners')
+@include('front.banners.home_page_banners')
 <!--pozivamo baners fajl-->
 
 	<div id="mainBody">

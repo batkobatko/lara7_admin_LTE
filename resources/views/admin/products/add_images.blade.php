@@ -73,20 +73,18 @@
                 </div>
               </div>
               <div class="col-md-6">
-              <div class="form-group">
-                  
+                <div class="form-group">
                 <?php $product_image_path = "dashboard/dist/img/product_img/small/".$productdata['main_image'] ?>
                 @if(!empty($productdata['main_image']) && file_exists($product_image_path))
                 <img style="width: 120px;" src="{{ asset('dashboard/dist/img/product_img/small/'.$productdata['main_image']) }}">
                 @else
                 <img style="width: 120px;" src="{{ asset('dashboard/dist/img/product_img/small/no-image.png') }}">
                 @endif
-
-                    </div>
-                  </div>
                 </div>
-                <div class="col-md-6">
-              <div class="form-group">
+              </div>
+            </div>
+              <div class="col-md-6">
+                <div class="form-group">
                   <div class="field_wrapper">
                     <div>
                       <input multiple="" id="images" name="images[]" type="file" name="images[]" value=""/>

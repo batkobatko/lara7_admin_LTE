@@ -66,8 +66,14 @@
                   <div> Recomended Image Size: width:1170px, Height:480px
                    @if(!empty($banner['image']))
                     <div> 
-                    <img style="width: 220px; margin-top: 15px; margin-top: 5px;" src="{{ asset('dashboard/dist/img/banners_img/'.$banner['image']) }}">
-                    </div>
+                      <?php $product_image_path = "dashboard/dist/img/banners_img/".$banner['image'] ?>
+                      @if(!empty($banner['image']) && file_exists($product_image_path))
+                      <img style="width: 250px; margin-top: 15px; margin-top: 5px;" src="{{ asset('dashboard/dist/img/banners_img/'.$banner['image']) }}">
+                      @else
+                      <img style="width: 100px; margin-top: 15px; margin-top: 5px;" src="{{ asset('dashboard/dist/img/product_img/small/no-image.png') }}">
+                      @endif
+                      <!--preeditovan cod -->
+                   </div>
                   @endif
                   </div>
                 </div>
