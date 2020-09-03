@@ -61,7 +61,7 @@
                     <td>{{ $brand->id }}</td>
                     <td>{{ $brand->name }}</td>
                     <td>
-                        <a title="Edit Brand" href="{{ url('admin/add-edit-brand/'.$brand->id) }}"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;
+                        <a title="Edit Brand" href="{{ url('admin/add-edit-brand/'.$brand->id) }}"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
                         <a title="Delete Brand" href="javascript:void(0)" class="confirmDelete" record="brand" recordid="{{  $brand->id }}"><i class="fas fa-trash"></i></a>&nbsp;&nbsp;
                       @if($brand->status==1)
                         <a class="updateBrandStatus" id="brand-{{  $brand->id }}" brand_id="{{  $brand->id }}" href="javascript:void(0)"><i class="fas fa-toggle-on" aria-hidden="true" status="active"></i></a>

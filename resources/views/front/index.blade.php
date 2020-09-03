@@ -18,7 +18,6 @@
 										@if(!empty($item['main_image']) && file_exists($product_image_path)) <img src="{{ asset($product_image_path) }}" alt="">
 										@else
 											<img src="{{ asset('dashboard/dist/img/product_img/small/no-image.png') }}" alt="">
-
 										@endif
 									</a>
 									<div class="caption">
