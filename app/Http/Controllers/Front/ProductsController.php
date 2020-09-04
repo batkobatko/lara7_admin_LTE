@@ -16,7 +16,7 @@ class ProductsController extends Controller
     		//echo "Category exist"; die;
     		$categoryDetails = Category::catDetails($url);
     		//dd($categoryDetails); die;
-            $categoryProducts = Product::whereIn('category_id',$categoryDetails['catIds'])->where('status',1)->get()->toArray();
+            $categoryProducts = Product::with('brand')->whereIn('category_id',$categoryDetails['catIds'])->where('status',1)->get()->toArray();
             //echo "<pre>"; print_r($categoryDetails); 
             //echo "<pre>"; print_r($categoryProducts); die;
             return view('front.products.listing')->with(compact('categoryDetails','categoryProducts'));

@@ -43,9 +43,9 @@
 		<li class="span3">
 			<div class="thumbnail">
 				<a  href="product_details.html"><?php $product_image_path = 'dashboard/dist/img/product_img/small/'.$product['main_image'];?>
-				@if(!empty($product['main_image']) && file_exists($product_image_path)) <img style="width: 150px;" src="{{ asset($product_image_path) }}" alt="">
+				@if(!empty($product['main_image']) && file_exists($product_image_path)) <img style="width: 250px; height: 350px;" src="{{ asset($product_image_path) }}" alt="">
 				@else
-				<img style="width: 150px;" src="{{ asset('dashboard/dist/img/product_img/small/no-image.png') }}" alt="">
+				<img style="width: 250px; height: 350px;" src="{{ asset('dashboard/dist/img/product_img/small/no-image.png') }}" alt="">
 				@endif</a>
 				<div class="caption">
 					<h5>{{ $product['product_name'] }}</h5>
@@ -54,7 +54,7 @@
 						<br>{{ $product['product_code'] }} ({{ $product['product_color'] }})						
 					</p>
 					
-					<h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">Rs.1000</a></h4>
+					<h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">{{ $product['product_price'] }}&nbsp;KM</a></h4>
 				</div>
 			</div>
 		</li>
