@@ -15,9 +15,9 @@
 			</div>
 			<div class="span3">
 				<h5>OUR OFFERS</h5>
-				<a href="#">NEW PRODUCTS</a>
-				<a href="#">TOP SELLERS</a>
-				<a href="special_offer.html">SPECIAL OFFERS</a>
+				<a href="#">NOVI ARTIKLI</a>
+				<a href="#"></a>
+				<a href="special_offer.html">SPECIJALNA PONUDA</a>
 			</div>
 			<div id="socialMedia" class="span3 pull-right">
 				<h5>SOCIAL MEDIA </h5>
@@ -26,6 +26,6 @@
 				<a href="https://www.youtube.com/StackDevelopers"><img width="60" height="60" src="{{ asset('images/front_images/youtube.png') }}" title="youtube" alt="youtube"/></a>
 			</div>
 		</div>
-		<p class="pull-right"><a target="_blank" href="https://www.youtube.com/StackDevelopers">&copy; Stack Developers</a></p>
+		<p class="pull-right"><a target="_blank" href="https://www.youtube.com/StackDevelopers">&copy; PIXEL</a></p>
 	</div><!-- Container End -->
 </div>

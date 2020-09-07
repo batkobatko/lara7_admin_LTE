@@ -9,7 +9,7 @@ $sections =Section::sections();
 			<div class="span6">Welcome!<strong> User</strong></div>
 			<div class="span6">
 				<div class="pull-right">
-					<a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Items in your cart </span> </a>
+					<a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> broj artikala u košarici [ 3 ]  </span> </a>
 				</div>
 			</div>
 		</div>
@@ -23,10 +23,10 @@ $sections =Section::sections();
 		          <span class="icon-bar"></span>
 		          <span class="icon-bar"></span>
 		        </a>
-		        <a class="brand" href="#">VUNENAR</a>
+		        <a class="brand" href="/">VUNENAR</a>
 		        <div class="nav-collapse">
 		          <ul class="nav">
-		            <li class="active"><a href="#">Home</a></li>
+		            <li class="active"><a href="/">Home</a></li>
 		            @foreach($sections as $section)
 			            @if(count($section['categories'])>0)
 			            <li class="dropdown">
