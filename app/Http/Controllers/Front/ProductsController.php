@@ -9,42 +9,87 @@ use App\Product;
 
 class ProductsController extends Controller
 {
-    Public function listing($url){
-    	//check url exist or not
-    	$categoryCount = Category::where(['url'=>$url,'status'=>1])->count();
-    	if($categoryCount>0){
-    		//echo "Category exist"; die;
-    		$categoryDetails = Category::catDetails($url);
-    		//dd($categoryDetails); die;
-            $categoryProducts = Product::with('brand')->whereIn('category_id',$categoryDetails['catIds'])->where('status',1);
+    Public function listing($url,Request $request){
+        if($request->ajax()){
+            $data = $request->all();
+            //echo "<pre>"; print_r($data); die;
+            $url = $data['url'];
+            $categoryCount = Category::where(['url'=>$url,'status'=>1])->count();
+            if($categoryCount>0){
+                //echo "Category exist"; die;
+                $categoryDetails = Category::catDetails($url);
+                //dd($categoryDetails); die;
+                $categoryProducts = Product::with('brand')->whereIn('category_id',$categoryDetails['catIds'])->where('status',1);
 
-            // check if Sort option select by user
-            if(isset($_GET['sort']) && !empty($_GET['sort'])){
-                if($_GET['sort']=="product_latest") {
+                // check if Sort option select by user
+               if(isset($data['sort']) && !empty($data['sort'])){
+                    if($data['sort']=="product_latest") {
+                        $categoryProducts->orderBy('id','Desc');
+                        //desc - descending order
+                    }else if($data['sort']=="product_name_a_z") {
+                        $categoryProducts->orderBy('product_name','Asc');
+                    }
+                    else if($data['sort']=="product_name_z_a") {
+                        $categoryProducts->orderBy('product_name','Desc');
+                    }
+                    else if($data['sort']=="price_lowest") {
+                        $categoryProducts->orderBy('product_price','Asc');
+                    }
+                    else if($data['sort']=="price_highest") {
+                        $categoryProducts->orderBy('product_price','Desc');
+                    }
+                }else{
                     $categoryProducts->orderBy('id','Desc');
-                    //desc - descending order
-                }else if($_GET['sort']=="product_name_a_z") {
-                    $categoryProducts->orderBy('product_name','Asc');
                 }
-                else if($_GET['sort']=="product_name_z_a") {
-                    $categoryProducts->orderBy('product_name','Desc');
-                }
-                else if($_GET['sort']=="price_lowest") {
-                    $categoryProducts->orderBy('product_price','Asc');
-                }
-                else if($_GET['sort']=="price_highest") {
-                    $categoryProducts->orderBy('product_price','Desc');
-                }
-            }else{
-                $categoryProducts->orderBy('id','Desc');
-            }
-            $categoryProducts = $categoryProducts->paginate(2);
 
-            //echo "<pre>"; print_r($categoryDetails); 
-            //echo "<pre>"; print_r($categoryProducts); die;
-            return view('front.products.listing')->with(compact('categoryDetails','categoryProducts'));
-    	}else{
-    		abort(404);
-    	}
+                $categoryProducts = $categoryProducts->paginate(30); 
+
+                //echo "<pre>"; print_r($categoryDetails); 
+                //echo "<pre>"; print_r($categoryProducts); die;
+                return view('front.products.ajax_products_listing')->with(compact('categoryDetails','categoryProducts','url'));
+            }else{
+                abort(404);
+           }
+
+        }else{
+        	//check url exist or not
+        	$categoryCount = Category::where(['url'=>$url,'status'=>1])->count();
+        	if($categoryCount>0){
+        		//echo "Category exist"; die;
+        		$categoryDetails = Category::catDetails($url);
+        		//dd($categoryDetails); die;
+                $categoryProducts = Product::with('brand')->whereIn('category_id',$categoryDetails['catIds'])->where('status',1);
+
+                // check if Sort option select by user
+ /*               if(isset($_GET['sort']) && !empty($_GET['sort'])){
+                    if($_GET['sort']=="product_latest") {
+                        $categoryProducts->orderBy('id','Desc');
+                        //desc - descending order
+                    }else if($_GET['sort']=="product_name_a_z") {
+                        $categoryProducts->orderBy('product_name','Asc');
+                    }
+                    else if($_GET['sort']=="product_name_z_a") {
+                        $categoryProducts->orderBy('product_name','Desc');
+                    }
+                    else if($_GET['sort']=="price_lowest") {
+                        $categoryProducts->orderBy('product_price','Asc');
+                    }
+                    else if($_GET['sort']=="price_highest") {
+                        $categoryProducts->orderBy('product_price','Desc');
+                    }
+                }else{
+                    $categoryProducts->orderBy('id','Desc');
+                }
+*/
+                $categoryProducts = $categoryProducts->paginate(30); 
+
+                //echo "<pre>"; print_r($categoryDetails); 
+                //echo "<pre>"; print_r($categoryProducts); die;
+                return view('front.products.listing')->with(compact('categoryDetails','categoryProducts','url'));
+        	}else{
+        		abort(404);
+    	   }
+        }
+
     }
 }
