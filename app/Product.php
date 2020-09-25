@@ -26,4 +26,14 @@ class Product extends Model
     	//pozivamo model images
     	//one product many images
     }
+
+    public static function productFilters(){
+        // filter Arrays (slicno kao na Amazonu)
+        $productFilters['fabricArray'] = array('Pamuk','Poliester','Vuna','Čista vuna');
+        $productFilters['sleeveArray'] = array('Dugi rukav','Polu-rukav','Kratki rukav','bey rukava');
+        $productFilters['patternArray'] = array('Checked','Plain','Printed','Self','Solid');
+        $productFilters['fitArray'] = array('Regular','Slim');
+        $productFilters['occasionArray'] = array('Casual','Formal');
+        return $productFilters;
+    }
 }

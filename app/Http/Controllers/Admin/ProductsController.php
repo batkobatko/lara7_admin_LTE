@@ -162,13 +162,15 @@ class ProductsController extends Controller
       return redirect('admin/products');
     }
 
-        // echo "<pre>"; print_r($categoruDetails); die;
+      // echo "<pre>"; print_r($categoryDetails); die;
      	// filter Arrays (slicno kao na Amazonu)
-    	$fabricArray = array('Cotton','Poliester','wool');
-    	$sleeveArray = array('Full Sleeve','Half Sleeve','Short Sleeve','Sleeveless');
-    	$patternArray = array('Checked','Plain','Printed','Self','Solid');
-    	$fitArray = array('Regular','Slim');
-    	$occasionArray = array('Casual','Formal');
+      $productFilters = Product::productFilters();
+      $fabricArray = $productFilters['fabricArray'];
+      $sleeveArray = $productFilters['sleeveArray'];
+      $patternArray = $productFilters['patternArray'];
+      $fitArray = $productFilters['fitArray'];
+      $occasionArray = $productFilters['occasionArray'];
+     
 
     	// Kreiranje relacija (Section with Categories and Subcategories)
     	$categories = Section::with('categories')->get();

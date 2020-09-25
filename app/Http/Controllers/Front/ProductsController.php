@@ -80,12 +80,21 @@ class ProductsController extends Controller
                 }else{
                     $categoryProducts->orderBy('id','Desc');
                 }
-*/
+*/              
                 $categoryProducts = $categoryProducts->paginate(30); 
 
+                $productFilters = Product::productFilters();
+                $fabricArray = $productFilters['fabricArray'];
+                $sleeveArray = $productFilters['sleeveArray'];
+                $patternArray = $productFilters['patternArray'];
+                $fitArray = $productFilters['fitArray'];
+                $occasionArray = $productFilters['occasionArray'];
                 //echo "<pre>"; print_r($categoryDetails); 
                 //echo "<pre>"; print_r($categoryProducts); die;
-                return view('front.products.listing')->with(compact('categoryDetails','categoryProducts','url'));
+
+                $page_name = "listing";
+
+                return view('front.products.listing')->with(compact('categoryDetails','categoryProducts','url','fabricArray','sleeveArray','patternArray','fitArray','occasionArray','page_name'));
         	}else{
         		abort(404);
     	   }
