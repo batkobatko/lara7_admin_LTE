@@ -26,7 +26,6 @@
 		</div>
 	</form>
 	
-	
 	<br class="clr"/>
 	<div class="tab-content filter_products" >
 

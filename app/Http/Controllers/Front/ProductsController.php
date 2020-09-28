@@ -21,7 +21,12 @@ class ProductsController extends Controller
                 //dd($categoryDetails); die;
                 $categoryProducts = Product::with('brand')->whereIn('category_id',$categoryDetails['catIds'])->where('status',1);
 
-                // check if Sort option select by user
+                // If Fabric filter is selected 
+                if(isset($data['fabric']) && !empty($data['fabric'])){
+                    $categoryProducts->whereIn('products.fabric',$data['fabric']);
+                }
+
+                // check if Sort option is selected 
                if(isset($data['sort']) && !empty($data['sort'])){
                     if($data['sort']=="product_latest") {
                         $categoryProducts->orderBy('id','Desc');
@@ -88,7 +93,7 @@ class ProductsController extends Controller
                 $sleeveArray = $productFilters['sleeveArray'];
                 $patternArray = $productFilters['patternArray'];
                 $fitArray = $productFilters['fitArray'];
-                $occasionArray = $productFilters['occasionArray'];
+                $occasionArray  = $productFilters['occasionArray'];
                 //echo "<pre>"; print_r($categoryDetails); 
                 //echo "<pre>"; print_r($categoryProducts); die;
 

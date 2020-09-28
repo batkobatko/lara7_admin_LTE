@@ -27,32 +27,32 @@ $sections =Section::sections();
 		<div class="well well-small">
 			<h5>Materijal</h5>
 			@foreach($fabricArray as $fabric)
-			<input style="margin-top: -3px" type="checkbox" name="fabric[]" id="{{ $fabric }}" value="{{ $fabric }}">&nbsp;&nbsp;{{ $fabric }} <br>
+			<input class="fabric" style="margin-top: -3px" type="checkbox" name="fabric[]" id="{{ $fabric }}" value="{{ $fabric }}">&nbsp;&nbsp;{{ $fabric }} <br>
 			@endforeach
 
 		</div>
 		<div class="well well-small">
 			<h5>Vrsta rukava</h5>
 			@foreach($sleeveArray as $sleve)
-			<input style="margin-top: -3px" type="checkbox" name="sleve[]" id="{{ $sleve }}" value="{{ $sleve }}">&nbsp;&nbsp;{{ $sleve }} <br>
+			<input class="fabric" style="margin-top: -3px" type="checkbox" name="sleve[]" id="{{ $sleve }}" value="{{ $sleve }}">&nbsp;&nbsp;{{ $sleve }} <br>
 			@endforeach
 		</div>
 		<div class="well well-small">
 			<h5>Bod</h5>
 			@foreach($patternArray as $patern)
-			<input style="margin-top: -3px" type="checkbox" name="patern[]" id="{{ $patern }}" value="{{ $patern }}">&nbsp;&nbsp;{{ $patern }} <br>
+			<input class="patern" style="margin-top: -3px" type="checkbox" name="patern[]" id="{{ $patern }}" value="{{ $patern }}">&nbsp;&nbsp;{{ $patern }} <br>
 			@endforeach
 		</div>
 		<div class="well well-small">
 			<h5>Veličina</h5>
 			@foreach($fitArray as $fit)
-			<input style="margin-top: -3px" type="checkbox" name="fit[]" id="{{ $fit }}" value="{{ $fit }}">&nbsp;&nbsp;{{ $fit }} <br>
+			<input class="fit" style="margin-top: -3px" type="checkbox" name="fit[]" id="{{ $fit }}" value="{{ $fit }}">&nbsp;&nbsp;{{ $fit }} <br>
 			@endforeach
 		</div>
 		<div class="well well-small">
-			<h5>Still</h5>
+			<h5>Stil</h5>
 			@foreach($occasionArray as $occasion)
-			<input style="margin-top: -3px" type="checkbox" name="occasion[]" id="{{ $occasion }}" value="{{ $occasion }}">&nbsp;&nbsp;{{ $occasion }} <br>
+			<input class="occasion"style="margin-top: -3px" type="checkbox" name="occasion[]" id="{{ $occasion }}" value="{{ $occasion }}">&nbsp;&nbsp;{{ $occasion }} <br>
 			@endforeach
 		</div>
 	@endif
