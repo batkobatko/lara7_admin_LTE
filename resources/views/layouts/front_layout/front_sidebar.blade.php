@@ -33,14 +33,14 @@ $sections =Section::sections();
 		</div>
 		<div class="well well-small">
 			<h5>Vrsta rukava</h5>
-			@foreach($sleeveArray as $sleve)
-			<input class="fabric" style="margin-top: -3px" type="checkbox" name="sleve[]" id="{{ $sleve }}" value="{{ $sleve }}">&nbsp;&nbsp;{{ $sleve }} <br>
+			@foreach($sleeveArray as $sleeve)
+			<input class="sleeve" style="margin-top: -3px" type="checkbox" name="sleeve[]" id="{{ $sleeve }}" value="{{ $sleeve }}">&nbsp;&nbsp;{{ $sleeve }} <br>
 			@endforeach
 		</div>
 		<div class="well well-small">
 			<h5>Bod</h5>
-			@foreach($patternArray as $patern)
-			<input class="patern" style="margin-top: -3px" type="checkbox" name="patern[]" id="{{ $patern }}" value="{{ $patern }}">&nbsp;&nbsp;{{ $patern }} <br>
+			@foreach($patternArray as $pattern)
+			<input class="pattern" style="margin-top: -3px" type="checkbox" name="pattern[]" id="{{ $pattern }}" value="{{ $pattern }}">&nbsp;&nbsp;{{ $pattern }} <br>
 			@endforeach
 		</div>
 		<div class="well well-small">

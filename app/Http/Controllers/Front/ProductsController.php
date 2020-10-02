@@ -26,6 +26,26 @@ class ProductsController extends Controller
                     $categoryProducts->whereIn('products.fabric',$data['fabric']);
                 }
 
+                // If Sleeve filter is selected 
+                if(isset($data['sleeve']) && !empty($data['sleeve'])){
+                    $categoryProducts->whereIn('products.sleeve',$data['sleeve']);
+                }
+
+                // If Sleeve filter is selected 
+                if(isset($data['pattern']) && !empty($data['pattern'])){
+                    $categoryProducts->whereIn('products.pattern',$data['pattern']);
+                }
+
+                // If Sleeve filter is selected 
+                if(isset($data['fit']) && !empty($data['fit'])){
+                    $categoryProducts->whereIn('products.fit',$data['fit']);
+                }
+
+                // If Sleeve filter is selected 
+                if(isset($data['occasion']) && !empty($data['occasion'])){
+                    $categoryProducts->whereIn('products.occasion',$data['occasion']);
+                }
+
                 // check if Sort option is selected 
                if(isset($data['sort']) && !empty($data['sort'])){
                     if($data['sort']=="product_latest") {
@@ -33,14 +53,11 @@ class ProductsController extends Controller
                         //desc - descending order
                     }else if($data['sort']=="product_name_a_z") {
                         $categoryProducts->orderBy('product_name','Asc');
-                    }
-                    else if($data['sort']=="product_name_z_a") {
+                    }else if($data['sort']=="product_name_z_a") {
                         $categoryProducts->orderBy('product_name','Desc');
-                    }
-                    else if($data['sort']=="price_lowest") {
+                    }else if($data['sort']=="price_lowest") {
                         $categoryProducts->orderBy('product_price','Asc');
-                    }
-                    else if($data['sort']=="price_highest") {
+                    }else if($data['sort']=="price_highest") {
                         $categoryProducts->orderBy('product_price','Desc');
                     }
                 }else{
