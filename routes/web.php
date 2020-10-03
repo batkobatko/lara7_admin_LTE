@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });*/
 
+use App\Category;
 
 Auth::routes();
 
@@ -82,11 +83,20 @@ Route::prefix('/admin')->namespace('Admin')->group(function(){
  	});
 });
 
-
 Route::namespace('Front')->group(function(){
 	// Home Page Route
 	Route::get('/','IndexController@index');
 	// Listing/Categories Ruote
-	Route::get('/{url}','ProductsController@listing');
-	// Route::get('/about')
+	//Route::get('/{url}','ProductsController@listing');
+	
+	//Get Category url
+    $catUrls = Category::select('url')->where('status',1)->get()->pluck('url')->toArray();
+    //echo "<pre>"; print_r($catUrls); die;
+    foreach ($catUrls as $url){
+    	Route::get('/'. $url,'ProductsController@listing');
+    }
+
+	Route::get('/contact-us',function(){
+		echo "test"; die;
+	});
 });

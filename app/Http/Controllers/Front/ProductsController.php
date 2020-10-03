@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Category;
@@ -9,7 +10,7 @@ use App\Product;
 
 class ProductsController extends Controller
 {
-    Public function listing($url,Request $request){
+    Public function listing(Request $request){
         if($request->ajax()){
             $data = $request->all();
             //echo "<pre>"; print_r($data); die;
@@ -74,6 +75,7 @@ class ProductsController extends Controller
            }
 
         }else{
+            $url = Route::getFacadeRoot()->current()->uri();
         	//check url exist or not
         	$categoryCount = Category::where(['url'=>$url,'status'=>1])->count();
         	if($categoryCount>0){
@@ -84,7 +86,7 @@ class ProductsController extends Controller
 
                 // check if Sort option select by user
  /*               if(isset($_GET['sort']) && !empty($_GET['sort'])){
-                    if($_GET['sort']=="product_latest") {
+                    if($_GET['sort ']=="product_latest") {
                         $categoryProducts->orderBy('id','Desc');
                         //desc - descending order
                     }else if($_GET['sort']=="product_name_a_z") {
